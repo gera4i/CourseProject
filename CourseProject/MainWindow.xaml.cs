@@ -57,8 +57,7 @@ namespace CourseProject
             isTransactionExpense = true;
             (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#1683e0");
             GroshyIncome.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0F559A");
-            GroshyExpense.FontSize = 18;
-            GroshyIncome.FontSize = 12;
+       
         }
 
         private void GroshyIncome_Click(object sender, RoutedEventArgs e)
@@ -66,8 +65,7 @@ namespace CourseProject
             isTransactionExpense = false;
             (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#1683e0");
             GroshyExpense.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0F559A");
-            GroshyIncome.FontSize = 18;
-            GroshyExpense.FontSize = 12;
+      
         }
        
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -88,13 +86,17 @@ namespace CourseProject
        
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //   GroshyModel.shared.groshyDataBase.AddCategory();
-            TabItem newTabItem = new TabItem
+            foreach (var item in GroshyModel.shared.accounts)
             {
-                Header = "Test",
-                Name = "Test"
-            };
-            GroshyTabControl.Items.Add(newTabItem);
+                int i = 0;
+                TabItem newTabItem = new TabItem
+                {
+                    Header = item.Name,
+                    Name = "a" + i
+                    };
+                    GroshyTabControl.Items.Add(newTabItem);
+                i++;
+            }
         }
 
         // ДОБАВЛЕНИЕ КНОПКОЙ НОВОЙ ВКЛАДКИ 
