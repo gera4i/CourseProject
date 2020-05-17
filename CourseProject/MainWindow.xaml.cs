@@ -23,14 +23,11 @@ namespace CourseProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        GroshyDataBase groshyDataBase = new GroshyDataBase();
         Transaction transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
         private bool isTransactionExpense = true;
         public MainWindow()
         {
-            groshyDataBase.CategoriesToList();
-            groshyDataBase.AccountsToList();
-            groshyDataBase.TransactionsToList();
+            GroshyModel.shared.LoadData();
             InitializeComponent();
             foreach (var item in GroshyModel.shared.categories)
             {
@@ -86,12 +83,18 @@ namespace CourseProject
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.accounts.ElementAt(0).SumOfAccount);
             MessageBox.Show(Convert.ToString(GroshyModel.shared.transactions.ElementAt(0).Description));
             transaction = new Transaction(true, 12, null, null, DateTime.Now, "ghbdtn");
-            groshyDataBase.AddTransaction(isTransactionExpense, Convert.ToDouble(GroshySumBox.Text), GroshyComboBoxCategory.Text, GroshyComboBoxAccount.Text, Convert.ToDateTime(GroshyDatePicker.SelectedDate), GroshyDescritptionBox.Text);
+            GroshyModel.shared.AddTransaction(isTransactionExpense, Convert.ToDouble(GroshySumBox.Text), GroshyComboBoxCategory.Text, GroshyComboBoxAccount.Text, Convert.ToDateTime(GroshyDatePicker.SelectedDate), GroshyDescritptionBox.Text);
         }
        
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            groshyDataBase.AddCategory();
+            //   GroshyModel.shared.groshyDataBase.AddCategory();
+            TabItem newTabItem = new TabItem
+            {
+                Header = "Test",
+                Name = "Test"
+            };
+            GroshyTabControl.Items.Add(newTabItem);
         }
 
         // ДОБАВЛЕНИЕ КНОПКОЙ НОВОЙ ВКЛАДКИ 

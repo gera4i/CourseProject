@@ -16,8 +16,20 @@ namespace CourseProject
         {
 
         }
-       
+        GroshyDataBase groshyDataBase = new GroshyDataBase();
 
+        public void AddTransaction(bool flag, double Sum, string Cat, string Acc, DateTime Date, string Discription)
+        {
+            groshyDataBase.AddTransaction( flag,  Sum,  Cat,  Acc,  Date,  Discription);
+        }
+        public void LoadData()
+        {
+            groshyDataBase.CategoriesToList();
+            groshyDataBase.AccountsToList();
+            groshyDataBase.TransactionsToList();
+
+        }
+       
         public static GroshyModel shared = new GroshyModel();
 
         public void AddTransaction(Transaction transaction)
