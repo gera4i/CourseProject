@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:CourseProject"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily"
+            Value="Constantia" />
+        </Style>
     </Application.Resources>
 </Application>

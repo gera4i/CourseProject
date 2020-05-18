@@ -29,6 +29,7 @@ namespace CourseProject
         {
             GroshyModel.shared.LoadData();
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
             foreach (var item in GroshyModel.shared.categories)
             {
                 GroshyComboBoxCategory.Items.Add(item.Name);
