@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily"
-            Value="Constantia" />
+            Value="Tahoma" />
         </Style>
     </Application.Resources>
 </Application>

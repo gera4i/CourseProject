@@ -8,7 +8,7 @@
         Title="Groshy" Height="650" Width="1000">
 
     <Window.Resources>
-   
+       
         <ControlTemplate TargetType="Button" x:Key="btTemplate">
             <Border CornerRadius="12" BorderBrush="#FFABADB3" BorderThickness="0"
                     Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
@@ -415,7 +415,7 @@
                     </Style>
                 </DatePicker.Resources>
             </DatePicker>
-            <Button Template="{StaticResource btTemplate}" x:Name="GroshyExpense" Content="Расход" HorizontalAlignment="Left" Height="40" Margin="0,93,0,0" VerticalAlignment="Top" Width="84" Click="GroshyExpense_Click" Background="#1683e0" BorderThickness="0" FontSize="14"/>
+            <Button Template="{StaticResource btTemplate}" x:Name="GroshyExpense" Content="Расход" HorizontalAlignment="Left" Height="40" Margin="0,93,0,0" VerticalAlignment="Top" Width="84" Click="GroshyExpense_Click" Background="#1683e0" BorderThickness="0" FontSize="14" FontFamily="Verdana"/>
             <Button Template="{StaticResource btTemplate}" x:Name="GroshyIncome" Content="Доход" HorizontalAlignment="Left" Height="40" Margin="86,93,0,0" VerticalAlignment="Top" Width="84" Click="GroshyIncome_Click" Background="#0F559A" FontSize="14"/>
             <ComboBox x:Name="GroshyComboBoxCategory"  
                       HorizontalAlignment="Left" Height="40" Margin="192,93,0,0" VerticalAlignment="Top" Width="119" />
@@ -446,7 +446,7 @@
                 <Label  x:Name="GroshySumOfAccounts" Content="Summa" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="35" Margin="1,0,-0.6,0.2"/>
 
             </Border>
-            <Label Content="Продукты" Foreground="White" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24" FontFamily="Constantia"/>
+            <Label Content="Продукты" Foreground="White" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
             <Label Content="Кафе" Foreground="White" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
             <Label Content="Жильё" Foreground="White" HorizontalAlignment="Left" Margin="10,311,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
             <Label Content="Покупки" Foreground="White" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
@@ -459,7 +459,7 @@
                     <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.4"></DropShadowEffect>
                 </Border.Effect>
             </Border>
-            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,0,10,0">
+            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,0,10,0" >
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -486,7 +486,7 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem x:Name="tab1" Header="tab1">
+                <TabItem x:Name="tab1" Header="tab1" >
                     <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" BorderThickness="0" Margin="10,10,0,0">
                         <DataGrid.Resources>
                             <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
