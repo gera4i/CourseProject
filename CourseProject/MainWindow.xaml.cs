@@ -34,13 +34,16 @@ namespace CourseProject
             Style = (Style)FindResource(typeof(Window));
             foreach (var item in GroshyModel.shared.categories)
             {
+                if(item.IsExpense)
                 GroshyComboBoxCategory.Items.Add(item.Name);
             }
             foreach (var item in GroshyModel.shared.accounts)
             {
                 GroshyComboBoxAccount.Items.Add(item.Name);
             }
+
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
+
             double summary = 0; // начало пробного примера
             foreach (var item in GroshyModel.shared.accounts)
             {
@@ -60,7 +63,14 @@ namespace CourseProject
             isTransactionExpense = true;
             (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#1683e0");
             GroshyIncome.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0F559A");
-       
+            //  GroshyComboBoxCategory.SelectedItem = 
+            GroshyComboBoxCategory.Items.Clear();
+            foreach (var item in GroshyModel.shared.categories)
+            {
+                if (item.IsExpense)
+                    GroshyComboBoxCategory.Items.Add(item.Name);
+            }
+
         }
 
         private void GroshyIncome_Click(object sender, RoutedEventArgs e)
@@ -68,7 +78,12 @@ namespace CourseProject
             isTransactionExpense = false;
             (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#1683e0");
             GroshyExpense.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0F559A");
-      
+            GroshyComboBoxCategory.Items.Clear();
+            foreach (var item in GroshyModel.shared.categories)
+            {
+                if (!item.IsExpense)
+                    GroshyComboBoxCategory.Items.Add(item.Name);
+            }
         }
        
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -101,7 +116,45 @@ namespace CourseProject
                 i++;
             }
         }
-     
+
+        private void GroshySumOfAccounts_Copy_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            GroshyBlure.Visibility = Visibility.Visible; 
+            GroshySettingsWindow groshySettingsWindow = new GroshySettingsWindow();
+            //var darkwindow = new Window()
+            //{
+            //    Background = Brushes.Black,
+            //    Opacity = 0.4,
+            //    AllowsTransparency = true,
+            //    WindowStyle = WindowStyle.None,
+            //    WindowState = WindowState.Normal,
+            //    Topmost = true
+            //};
+            //darkwindow.Show();
+            groshySettingsWindow.ShowDialog();
+            GroshyBlure.Visibility = Visibility.Hidden;
+            //darkwindow.Close();
+
+        }
+
+        //     private void ApplyEffect(Window win)
+        //     {
+        //         System.Windows.Media.B objBlur =
+        //new System.Windows.Media.Effects.BlurEffect();
+        //         Background = Brushes.Black;
+        //         Opacity = 0.4;
+        //         AllowsTransparency = true;
+        //         WindowStyle = WindowStyle.None;
+        //         WindowState = WindowState.Maximized;
+        //         win.Effect = objBlur;
+        //     }
+
+        //     private void ClearEffect(Window win)
+        //     {
+        //         win.Effect = null;
+        //     }
+
         // ДОБАВЛЕНИЕ КНОПКОЙ НОВОЙ ВКЛАДКИ 
         //private void Button_Click_1(object sender, RoutedEventArgs e)
         //{

@@ -54,7 +54,8 @@ namespace CourseProject
                         while (reader.Read())
                         {
                             String tempCategory = reader["Category"].ToString();
-                            Category category = new Category(tempCategory);
+                            bool isExpense = Convert.ToBoolean(reader["IsExpense"]);
+                            Category category = new Category(tempCategory, isExpense);
                             GroshyModel.shared.categories.Add(category);
                         }
                     }

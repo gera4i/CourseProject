@@ -10,9 +10,11 @@ namespace CourseProject
     public class Category
     {
         public string Name { get; set; }
-        public Category(string Name)
+        public bool IsExpense { get; set; }
+        public Category(string Name, bool isExpense)
         {
             this.Name = Name;
+            this.IsExpense = isExpense;
         }
     }
 }

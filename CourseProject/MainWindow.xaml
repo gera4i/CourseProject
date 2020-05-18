@@ -8,7 +8,7 @@
         Title="Groshy" Height="650" Width="1000">
 
     <Window.Resources>
-       
+
         <ControlTemplate TargetType="Button" x:Key="btTemplate">
             <Border CornerRadius="12" BorderBrush="#FFABADB3" BorderThickness="0"
                     Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
@@ -439,7 +439,7 @@
 
             </Border>
             <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,509,1,1">
-                <Label  x:Name="GroshySumOfAccounts_Copy" Content="Настройки" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="35" Margin="0,0,0.4,-0.2"/>
+                <Label  x:Name="GroshySumOfAccounts_Copy" Content="Настройки" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="18" Margin="0,0,0.4,-0.2" PreviewMouseDown="GroshySumOfAccounts_Copy_PreviewMouseDown"/>
 
             </Border>
             <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,1,1,507">
@@ -523,6 +523,7 @@
             </TabControl>
 
         </Grid>
+        <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden"/>
 
 
 
