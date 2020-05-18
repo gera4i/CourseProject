@@ -319,10 +319,43 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                                <Setter TargetName="Border" Property="Background" Value="#1683e0"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="GotFocusColor" Color="Green" />
+        <SolidColorBrush x:Key="LostFocusColor" Color="Transparent" />
+
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border x:Name="border"
+                           BorderBrush="Transparent"
+                           BorderThickness="1"
+                           Background="Transparent"
+                           SnapsToDevicePixels="True"
+                           Margin="0">
+                            <ContentPresenter Name="CellContent" SnapsToDevicePixels="True" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFD8D8D8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -397,13 +430,18 @@
         </Grid>
 
         <Grid HorizontalAlignment="Left" Height="587" Margin="10,23,0,-104.4" VerticalAlignment="Top" Width="206">
-            <Button Content="Button" HorizontalAlignment="Left" Height="40" Margin="10,169,0,0" VerticalAlignment="Top" Width="253" Click="Button_Click_1"/>
+            <Button Template="{StaticResource btTemplate}" Content="Button" HorizontalAlignment="Left" Height="40" Margin="10,169,0,0" VerticalAlignment="Top" Width="152" Click="Button_Click_1"/>
             <Label x:Name="GroshySumOfAccounts" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Height="40" Width="253"/>
 
 
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="362" Margin="283,178,0,0" VerticalAlignment="Top" Width="620">
-            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom">
+        <Grid HorizontalAlignment="Left" Height="384" Margin="283,178,0,0" VerticalAlignment="Top" Width="647">
+            <Border Height="362" HorizontalAlignment="Left" Margin="-10,0,-16,0"  Width="646" VerticalAlignment="Top" CornerRadius="12" Background="White" BorderBrush="White" BorderThickness="0">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="12.5" Opacity="0.4"></DropShadowEffect>
+                </Border.Effect>
+            </Border>
+            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,0,10,0">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -431,13 +469,33 @@
                     </Style>
                 </TabControl.Resources>
                 <TabItem x:Name="tab1" Header="tab1">
-                    <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="612" AutoGenerateColumns="False">
+                    <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" BorderThickness="0" Margin="10,10,0,0">
+                        <DataGrid.Resources>
+                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderThickness" Value="0 1 0 1"/>
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="Height" Value="auto" />
+                                <Setter Property="Width" Value="auto"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+
+                        </DataGrid.Resources>
+                       
                         <DataGrid.Columns >
-                            <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name}" Width="120" />
-                            <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name}" Width="120" />
-                            <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction}" Width="120" />
-                            <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date}" Width="120" />
-                            <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description}" Width="140"/>
+                            <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name}" Width="118"/>
+                            <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name}" Width="119" />
+                            <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction}" Width="118" />
+                            <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date}" Width="119" />
+                            <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description}" Width="125">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
