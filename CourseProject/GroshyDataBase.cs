@@ -32,7 +32,7 @@ namespace CourseProject
             {
                 Sum = -Sum;
             }
-            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Sum, Cat, Acc, convertDate, Discription);
+            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", Sum, Cat, Acc, convertDate, Discription);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

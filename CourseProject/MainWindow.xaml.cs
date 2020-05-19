@@ -89,11 +89,13 @@ namespace CourseProject
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             transaction.IsExpense = isTransactionExpense;
-            transaction.Account = GroshyModel.shared.accounts.ElementAt(GroshyComboBoxAccount.SelectedIndex);
-            transaction.Category = GroshyModel.shared.categories.ElementAt(GroshyComboBoxCategory.SelectedIndex);
+
+            transaction.Account = GroshyModel.shared.accounts.Find(item => item.Name == GroshyComboBoxAccount.Text);
+            transaction.Category = GroshyModel.shared.categories.Find(item => item.Name == GroshyComboBoxCategory.Text);
+            
             transaction.Date = (DateTime)GroshyDatePicker.SelectedDate;
             transaction.Description = GroshyDescritptionBox.Text;
-            transaction.SumOfTransaction = Convert.ToInt32(GroshySumBox.Text);
+            transaction.SumOfTransaction = Convert.ToDouble(GroshySumBox.Text);
             GroshyModel.shared.AddTransaction(transaction);
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.accounts.ElementAt(0).SumOfAccount);
@@ -138,22 +140,20 @@ namespace CourseProject
 
         }
 
-        //     private void ApplyEffect(Window win)
-        //     {
-        //         System.Windows.Media.B objBlur =
-        //new System.Windows.Media.Effects.BlurEffect();
-        //         Background = Brushes.Black;
-        //         Opacity = 0.4;
-        //         AllowsTransparency = true;
-        //         WindowStyle = WindowStyle.None;
-        //         WindowState = WindowState.Maximized;
-        //         win.Effect = objBlur;
-        //     }
+        private void GroshyDescritptionBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GroshyDescritptionBox.Text = "";
+            GroshyDescritptionBox.Foreground = Brushes.Black;
+        }
 
-        //     private void ClearEffect(Window win)
-        //     {
-        //         win.Effect = null;
-        //     }
+        private void GroshySumBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GroshySumBox.Text = "";
+            GroshySumBox.Foreground = Brushes.Black;
+        }
+
+
+
 
         // ДОБАВЛЕНИЕ КНОПКОЙ НОВОЙ ВКЛАДКИ 
         //private void Button_Click_1(object sender, RoutedEventArgs e)
