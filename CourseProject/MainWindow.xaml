@@ -439,11 +439,11 @@
 
             </Border>
             <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,509,1,1">
-                <Label  x:Name="GroshySumOfAccounts_Copy" Content="Настройки" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="18" Margin="0,0,0.4,-0.2" PreviewMouseDown="GroshySumOfAccounts_Copy_PreviewMouseDown"/>
+                <Label  Foreground="White" x:Name="GroshySumOfAccounts_Copy" Content="Настройки" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="18" Margin="0,0,0.4,-0.2" PreviewMouseDown="GroshySumOfAccounts_Copy_PreviewMouseDown"/>
 
             </Border>
             <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,1,1,507">
-                <Label  x:Name="GroshySumOfAccounts" Content="Summa" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="35" Margin="1,0,-0.6,0.2"/>
+                <Label Foreground="White" x:Name="GroshySumOfAccounts" Content="Summa" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="35" Margin="1,0,-0.6,0.2"/>
 
             </Border>
             <Label Content="Продукты" Foreground="White" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>

@@ -12,9 +12,21 @@ namespace CourseProject
     class GroshyDataBase
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["CourseProject.Properties.Settings.GroshyConnectionString"].ConnectionString;
-        public void AddCategory() // категория
+        public void AddCategory(int IsExpense, string Name) // категория
         {
-            string sqlExpression = "INSERT INTO Categories (Category) VALUES ('Экскурсии')";
+            string sqlExpression = String.Format("INSERT INTO Categories (Category, IsExpense) VALUES ('{0}', {1})", Name, IsExpense);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                int number = command.ExecuteNonQuery();
+                MessageBox.Show("Добавлено объектов: " + number);
+            }
+        }
+        public void AddAccount(double SumOfAccount, string Name) // аккаунт
+        {
+            string sqlExpression = String.Format("INSERT INTO Accounts (Account, SumOfAccount) VALUES ('{0}', {1})", Name, SumOfAccount);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -32,7 +44,7 @@ namespace CourseProject
             {
                 Sum = -Sum;
             }
-            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", Sum, Cat, Acc, convertDate, Discription);
+            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Sum, Cat, Acc, convertDate, Discription);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

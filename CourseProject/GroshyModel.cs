@@ -22,6 +22,14 @@ namespace CourseProject
         {
             groshyDataBase.AddTransaction( flag,  Sum,  Cat,  Acc,  Date,  Discription);
         }
+        public void AddCategory(int IsExpense, string Name)
+        {
+            groshyDataBase.AddCategory(IsExpense, Name);
+        }
+        public void AddAccount(double Sum, string Name)
+        {
+            groshyDataBase.AddAccount(Sum, Name);
+        }
         public void LoadData()
         {
             groshyDataBase.CategoriesToList();
