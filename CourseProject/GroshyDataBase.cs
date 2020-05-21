@@ -26,7 +26,8 @@ namespace CourseProject
         }
         public void AddAccount(double SumOfAccount, string Name) // аккаунт
         {
-            string sqlExpression = String.Format("INSERT INTO Accounts (Account, SumOfAccount) VALUES ('{0}', {1})", Name, SumOfAccount);
+            string Summa = Convert.ToString(SumOfAccount).Replace(",", ".");
+            string sqlExpression = String.Format("INSERT INTO Accounts (Account, SumOfAccount) VALUES ('{0}', {1})", Name, Summa);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -44,7 +45,8 @@ namespace CourseProject
             {
                 Sum = -Sum;
             }
-            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Sum, Cat, Acc, convertDate, Discription);
+            string Summa = Convert.ToString(Sum).Replace(",", ".");
+            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Summa, Cat, Acc, convertDate, Discription);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

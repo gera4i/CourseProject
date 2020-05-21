@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,44 +30,38 @@ namespace CourseProject
 
         private void GroshyAddCategory_Click(object sender, RoutedEventArgs e)
         {
+            string tempStr = GroshyNameOfCategory.Text.Trim().ToLower();
             bool flag = true;
             while (flag)
             {
-                if (GroshyNameOfCategory.Text != "Введите название категории")
+                if (GroshyNameOfCategory.Text != "Введите название категории" || tempStr == "")
                 {
-                    string tempStr = GroshyNameOfCategory.Text.Trim().ToLower();
-                    if (tempStr == "")
-                    {
-                        MessageBox.Show("Вы не указали название категории");
-                        break;
-                    }
+                    MessageBox.Show("Вы не указали название категории");
+                    break;
+                }
 
-                    tempStr = tempStr.Replace(tempStr.First().ToString(), tempStr.First().ToString().ToUpper());
-                    if (Convert.ToBoolean(RadioButtonExpense.IsChecked) || Convert.ToBoolean(RadioButtonIncome.IsChecked))
+                tempStr = tempStr.Replace(tempStr.First().ToString(), tempStr.First().ToString().ToUpper());
+                if (Convert.ToBoolean(RadioButtonExpense.IsChecked) || Convert.ToBoolean(RadioButtonIncome.IsChecked))
+                {
+                    if (GroshyModel.shared.categories.Find(x => x.Name == tempStr) == null)
                     {
-                        if (GroshyModel.shared.categories.Find(x => x.Name == tempStr) == null)
+                        if (Convert.ToBoolean(RadioButtonExpense.IsChecked))
                         {
-                            if (Convert.ToBoolean(RadioButtonExpense.IsChecked))
-                            {
-                                GroshyModel.shared.AddCategory(1, GroshyNameOfCategory.Text);
-                            }
-                            else
-                            {
-                                GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
-                            }
+                            GroshyModel.shared.AddCategory(1, GroshyNameOfCategory.Text);
                         }
-                        else MessageBox.Show("Такая категория уже существует");
+                        else
+                        {
+                            GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Вы не указали тип категории");
-                        return;
-                    }
+                    else MessageBox.Show("Такая категория уже существует");
                 }
                 else
-                { 
-                    MessageBox.Show("Вы не указали название категории"); 
+                {
+                    MessageBox.Show("Вы не указали тип категории");
+                    return;
                 }
+
                 flag = false;
             }
             GroshyNameOfCategory.Text = "Введите название категории";
@@ -75,31 +70,35 @@ namespace CourseProject
 
         private void GroshyAddAccount_Click(object sender, RoutedEventArgs e)
         {
-            string tempStr = GroshyNameOfAccount.Text.Trim().ToLower();
-            tempStr = tempStr.Replace(tempStr.First().ToString(), tempStr.First().ToString().ToUpper());
-            if (Convert.ToBoolean(RadioButtonExpense.IsChecked) || Convert.ToBoolean(RadioButtonIncome.IsChecked))
+            string NameOfAccount = GroshyNameOfAccount.Text.Trim().ToLower();
+            double Summa = 0;
+            bool flag = true;
+            while (flag)
             {
-                if (GroshyModel.shared.categories.Find(x => x.Name == tempStr) == null)
+                if(GroshySumOfAccount.Text != "Введите сумму счёта")
                 {
-                    if (Convert.ToBoolean(RadioButtonExpense.IsChecked))
-                    {
-                        GroshyModel.shared.AddCategory(1, GroshyNameOfCategory.Text);
-                    }
-                    else
-                    {
-                        GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
-                    }
+                    Summa = Convert.ToDouble(GroshySumOfAccount.Text);
+                }
+                if (GroshyNameOfAccount.Text == "Введите название счёта" || NameOfAccount == "")
+                {
+
+                    MessageBox.Show("Вы не указали название счёта");
+                    break;
+                }
+                NameOfAccount = NameOfAccount.Replace(NameOfAccount.First().ToString(), NameOfAccount.First().ToString().ToUpper());
+                if (GroshyModel.shared.accounts.Find(x => x.Name == NameOfAccount) == null)
+                {
+                    GroshyModel.shared.AddAccount(Summa, NameOfAccount);
                 }
                 else
                 {
-                    MessageBox.Show("Такая категория уже существует");
+                    MessageBox.Show("Счёт с таким названием уже существует!");
+                    return;
                 }
+                flag = false;
             }
-            else
-            {
-                MessageBox.Show("Вы не указали тип категории");
-            }
-
+            GroshyNameOfAccount.Text = "Введите название счёта";
+            GroshyNameOfAccount.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
         }
 
         ///////////////// 
@@ -125,7 +124,7 @@ namespace CourseProject
         ///////////////// 
         private void GroshyNameOfCategory_GotFocus(object sender, RoutedEventArgs e)
         {
-            if(GroshyNameOfCategory.Text == "Введите название категории")
+            if (GroshyNameOfCategory.Text == "Введите название категории")
             {
                 GroshyNameOfCategory.Text = "";
                 GroshyNameOfCategory.Foreground = Brushes.Black;
@@ -147,7 +146,7 @@ namespace CourseProject
                 GroshySumOfAccount.Text = "";
                 GroshySumOfAccount.Foreground = Brushes.Black;
             }
-                
+
         }
 
         private void GroshySumOfAccount_LostFocus(object sender, RoutedEventArgs e)
@@ -157,6 +156,18 @@ namespace CourseProject
                 GroshySumOfAccount.Text = "Введите сумму счёта";
                 GroshySumOfAccount.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
             }
+        }
+
+ 
+        private Regex regex = new Regex("[^0-9\\,]+");
+        private void GroshySumOfAccount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void GroshySumOfAccount_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = e.Key == Key.Space;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -150,6 +151,19 @@ namespace CourseProject
         {
             GroshySumBox.Text = "";
             GroshySumBox.Foreground = Brushes.Black;
+        }
+
+        private void GroshySumBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = e.Key == Key.Space;
+        }
+
+        private Regex regex = new Regex("[^0-9\\,]+");
+  
+        private void GroshySumBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = regex.IsMatch(e.Text);
+
         }
 
 
