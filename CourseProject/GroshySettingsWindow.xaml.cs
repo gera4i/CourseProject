@@ -34,7 +34,7 @@ namespace CourseProject
             bool flag = true;
             while (flag)
             {
-                if (GroshyNameOfCategory.Text != "Введите название категории" || tempStr == "")
+                if (GroshyNameOfCategory.Text == "Введите название категории" || tempStr == "")
                 {
                     MessageBox.Show("Вы не указали название категории");
                     break;
