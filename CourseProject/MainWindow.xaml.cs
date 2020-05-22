@@ -30,6 +30,13 @@ namespace CourseProject
         private bool isTransactionExpense = true;
         public MainWindow()
         {
+            
+            SignIn sign = new SignIn();
+            sign.ShowDialog();
+            if (GroshyModel.shared.user.Id == 0)
+            {
+                Close();
+            }
             GroshyModel.shared.LoadData();
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));

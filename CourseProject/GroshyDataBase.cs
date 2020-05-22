@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -55,6 +56,25 @@ namespace CourseProject
                 int number = command.ExecuteNonQuery();
             }
         }
+
+        //public void AddUser()
+        //{
+        //    string convertDate;
+        //    convertDate = Convert.ToString(Date.Year) + "-0" + Convert.ToString(Date.Month) + "-" + Convert.ToString(Date.Day);
+        //    if (flag)
+        //    {
+        //        Sum = -Sum;
+        //    }
+        //    string Summa = Convert.ToString(Sum).Replace(",", ".");
+        //    string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Summa, Cat, Acc, convertDate, Discription);
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        SqlCommand command = new SqlCommand(sqlExpression1, connection);
+        //        int number = command.ExecuteNonQuery();
+        //    }
+        //}
         public void CategoriesToList()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -92,6 +112,27 @@ namespace CourseProject
                             Double tempSum = Convert.ToDouble(reader["SumOfAccount"].ToString());
                             Account account = new Account(tempAccount, tempSum);
                             GroshyModel.shared.accounts.Add(account);
+                        }
+                    }
+                }
+            }
+        }
+        public void GetUser(string Login, string Password, User user)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string readString = String.Format("select * from Users where Password = '{0}' and Login = '{1}'", Password, Login);
+                using (SqlCommand command = new SqlCommand(readString, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            String tempLogin = reader["Login"].ToString();
+                            int tempId = Convert.ToInt32(reader["IdUser"]);
+                            user.Id = tempId;
+                            user.Login = tempLogin;
                         }
                     }
                 }

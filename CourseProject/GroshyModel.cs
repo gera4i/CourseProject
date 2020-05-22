@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -17,7 +18,7 @@ namespace CourseProject
 
         }
         GroshyDataBase groshyDataBase = new GroshyDataBase();
-
+        public User user = new User(null, 0);
         public void AddTransaction(bool flag, double Sum, string Cat, string Acc, DateTime Date, string Discription)
         {
             groshyDataBase.AddTransaction( flag,  Sum,  Cat,  Acc,  Date,  Discription);
@@ -29,6 +30,10 @@ namespace CourseProject
         public void AddAccount(double Sum, string Name)
         {
             groshyDataBase.AddAccount(Sum, Name);
+        }
+        public void GetUser(string Login, string Password)
+        {
+            groshyDataBase.GetUser(Login, Password, user);
         }
         public void LoadData()
         {

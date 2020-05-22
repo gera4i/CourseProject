@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\User.cs" />
     <Compile Include="GroshyDataBase.cs" />
     <Compile Include="GroshyDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -67,6 +68,12 @@
     <Compile Include="GroshyTransactionButton.cs" />
     <Compile Include="GroshySettingsWindow.xaml.cs">
       <DependentUpon>GroshySettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignIn.xaml.cs">
+      <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +92,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="GroshySettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
