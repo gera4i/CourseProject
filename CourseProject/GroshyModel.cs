@@ -19,10 +19,7 @@ namespace CourseProject
         }
         GroshyDataBase groshyDataBase = new GroshyDataBase();
         public User user = new User(null, 0);
-        public void AddTransaction(bool flag, double Sum, string Cat, string Acc, DateTime Date, string Discription)
-        {
-            groshyDataBase.AddTransaction( flag,  Sum,  Cat,  Acc,  Date,  Discription);
-        }
+     
         public void AddCategory(int IsExpense, string Name)
         {
             groshyDataBase.AddCategory(IsExpense, Name);
@@ -64,6 +61,17 @@ namespace CourseProject
                 transaction.Account.SumOfAccount += transaction.SumOfTransaction;
             }
             transactions.Add(transaction);
+            groshyDataBase.AddTransactionToDB(transaction, user.Id);
+        }
+
+        public double CountMoney()
+        {
+            double summary = 0; // начало пробного примера
+            foreach (var item in accounts)
+            {
+                summary += item.SumOfAccount;
+            }
+            return summary;
         }
         public BindingList<Transaction> transactions = new BindingList<Transaction>();
         public List<Account> accounts = new List<Account>();

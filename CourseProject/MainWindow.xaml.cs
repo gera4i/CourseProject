@@ -45,12 +45,7 @@ namespace CourseProject
 
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
 
-            double summary = 0; // начало пробного примера
-            foreach (var item in GroshyModel.shared.accounts)
-            {
-                summary += item.SumOfAccount;
-            }
-            GroshySumOfAccounts.Content = Convert.ToString(summary); // кнец пробный пример
+            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
 
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
         }
@@ -102,9 +97,9 @@ namespace CourseProject
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.accounts.ElementAt(0).SumOfAccount);
             MessageBox.Show(Convert.ToString(GroshyModel.shared.transactions.ElementAt(0).Description));
             transaction = new Transaction(true, 12, null, null, DateTime.Now, "ghbdtn");
-            GroshyModel.shared.AddTransaction(isTransactionExpense, Convert.ToDouble(GroshySumBox.Text), GroshyComboBoxCategory.Text, GroshyComboBoxAccount.Text, Convert.ToDateTime(GroshyDatePicker.SelectedDate), GroshyDescritptionBox.Text);
+            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
         }
-       
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             foreach (var item in GroshyModel.shared.accounts)

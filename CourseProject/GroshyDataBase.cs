@@ -15,7 +15,7 @@ namespace CourseProject
         static string connectionString = ConfigurationManager.ConnectionStrings["CourseProject.Properties.Settings.GroshyConnectionString"].ConnectionString;
         public void AddCategory(int IsExpense, string Name) // категория
         {
-            string sqlExpression = String.Format("INSERT INTO Categories (Category, IsExpense) VALUES ('{0}', {1})", Name, IsExpense);
+            string sqlExpression = String.Format("INSERT INTO Categories (IdUser, Category, IsExpense) VALUES ({0}, '{1}', {2})", GroshyModel.shared.user.Id, Name, IsExpense);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -28,7 +28,7 @@ namespace CourseProject
         public void AddAccount(double SumOfAccount, string Name) // аккаунт
         {
             string Summa = Convert.ToString(SumOfAccount).Replace(",", ".");
-            string sqlExpression = String.Format("INSERT INTO Accounts (Account, SumOfAccount) VALUES ('{0}', {1})", Name, Summa);
+            string sqlExpression = String.Format("INSERT INTO Accounts (IdUser, Account, SumOfAccount) VALUES ({0}, '{1}', {2})", GroshyModel.shared.user.Id, Name, Summa);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -38,21 +38,45 @@ namespace CourseProject
                 MessageBox.Show("Добавлено объектов: " + number);
             }
         }
-        public void AddTransaction(bool flag, double Sum, string Cat, string Acc, DateTime Date, string Discription)
+        public void AddTransactionToDB(Transaction transaction, int id)
         {
             string convertDate;
-            convertDate = Convert.ToString(Date.Year) + "-0" + Convert.ToString(Date.Month) + "-" + Convert.ToString(Date.Day);
-            if (flag)
+            if(transaction.Date.Month < 10)
             {
-                Sum = -Sum;
+                convertDate = Convert.ToString(transaction.Date.Year) + "-0" + Convert.ToString(transaction.Date.Month) + "-" + Convert.ToString(transaction.Date.Day);
             }
-            string Summa = Convert.ToString(Sum).Replace(",", ".");
-            string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Summa, Cat, Acc, convertDate, Discription);
-
+            else
+            {
+                convertDate = Convert.ToString(transaction.Date.Year) + "-" + Convert.ToString(transaction.Date.Month) + "-" + Convert.ToString(transaction.Date.Day);
+            }
+            if (transaction.IsExpense)
+            {
+                transaction.SumOfTransaction = -transaction.SumOfTransaction;
+            }
+            string Summa = Convert.ToString(transaction.SumOfTransaction).Replace(",", ".");
+            string sqlExpression1 = String.Format("INSERT INTO Transactions (IdUser, SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", id, Summa, transaction.Category.Name, transaction.Account.Name, convertDate, transaction.Description);
+            string sqlExpression2 = String.Format("UPDATE Accounts SET SumOfAccount = '{0}' WHERE Account = '{1}' and IdUser = {2}", Convert.ToString(transaction.Account.SumOfAccount).Replace(",", "."), transaction.Account.Name, 1);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(sqlExpression1, connection);
+                SqlTransaction transactionForDB = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+                command.Transaction = transactionForDB;
+
+                try
+                {
+                    command.CommandText = sqlExpression1;
+                    command.ExecuteNonQuery();
+                    command.CommandText = sqlExpression2;
+                    command.ExecuteNonQuery();
+
+                    transactionForDB.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transactionForDB.Rollback();
+                    MessageBox.Show(ex.Message);
+                }
                 int number = command.ExecuteNonQuery();
             }
         }
@@ -80,7 +104,7 @@ namespace CourseProject
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string readString = "select * from Categories";
+                string readString = String.Format("select * from Categories WHERE IdUser = {0}", GroshyModel.shared.user.Id);
                 using (SqlCommand command = new SqlCommand(readString, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -101,7 +125,7 @@ namespace CourseProject
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string readString = "select * from Accounts";
+                string readString = String.Format("select * from Accounts WHERE IdUser = {0}", GroshyModel.shared.user.Id);
                 using (SqlCommand command = new SqlCommand(readString, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -178,15 +202,15 @@ namespace CourseProject
             {
                 bool isExpenceFlag = true;
                 connection.Open();
-                string readString = "select * from Transactions";
+                string readString = String.Format("select * from Transactions WHERE IdUser = {0}", GroshyModel.shared.user.Id);
                 using (SqlCommand command = new SqlCommand(readString, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         { 
-                            Category cat = GroshyModel.shared.categories.ElementAt(0);
-                            Account acc  = GroshyModel.shared.accounts.ElementAt(0);
+                            Category cat = new Category(null, true);
+                            Account acc  = new Account(null, 0);
 
                             Double tempSum = Convert.ToDouble(reader["SumOfTransaction"].ToString());
                             String tempAccount = reader["Account"].ToString();
