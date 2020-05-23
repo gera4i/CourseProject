@@ -30,20 +30,13 @@ namespace CourseProject
         private bool isTransactionExpense = true;
         public MainWindow()
         {
-            
-            SignIn sign = new SignIn();
-            sign.ShowDialog();
-            if (GroshyModel.shared.user.Id == 0)
-            {
-                Close();
-            }
             GroshyModel.shared.LoadData();
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
             foreach (var item in GroshyModel.shared.categories)
             {
-                if(item.IsExpense)
-                GroshyComboBoxCategory.Items.Add(item.Name);
+                if (item.IsExpense)
+                    GroshyComboBoxCategory.Items.Add(item.Name);
             }
             foreach (var item in GroshyModel.shared.accounts)
             {
@@ -60,8 +53,8 @@ namespace CourseProject
             GroshySumOfAccounts.Content = Convert.ToString(summary); // кнец пробный пример
 
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
-
         }
+    
 
 
 

@@ -138,6 +138,39 @@ namespace CourseProject
                 }
             }
         }
+        public bool CheckLogin(string Login)
+        {
+            bool IsLogineExists = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string readString = String.Format("select * from Users where Login = '{0}'", Login);
+                using (SqlCommand command = new SqlCommand(readString, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            IsLogineExists = true;
+                        }
+                    }
+                }
+            }
+            return IsLogineExists;
+        }
+
+        public void SetUser(string Login, string Password)
+        {
+                string sqlExpression = String.Format("INSERT INTO Users (Login, Password) VALUES ('{0}', '{1}')", Login, Password);
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    int number = command.ExecuteNonQuery();
+                    MessageBox.Show("Добавлено объектов: " + number);
+                }
+        }
 
         public void TransactionsToList()
         {

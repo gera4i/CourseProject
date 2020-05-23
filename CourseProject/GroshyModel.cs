@@ -35,6 +35,14 @@ namespace CourseProject
         {
             groshyDataBase.GetUser(Login, Password, user);
         }
+        public void SetUser(string Login, string Password)
+        {
+            groshyDataBase.SetUser(Login, Password);
+        }
+        public bool CheckLogin(string Login)
+        {
+            return groshyDataBase.CheckLogin(Login);
+        }
         public void LoadData()
         {
             groshyDataBase.CategoriesToList();

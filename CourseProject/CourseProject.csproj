@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PasswordConverter.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="GroshyDataBase.cs" />
     <Compile Include="GroshyDataSet.Designer.cs">

@@ -20,30 +20,41 @@ namespace CourseProject
     /// </summary>
     public partial class SignIn : Window
     {
+        bool flag = false;
+        PasswordConverter converter = new PasswordConverter();
         public SignIn()
         {
             InitializeComponent();
+            //GroshyPassword.UseSystemPasswordChar = true;
         }
 
         private void GroshyRegister_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
+            Visibility = Visibility.Hidden;
             Register register = new Register();
             register.ShowDialog();
-            Show();
+            Visibility = Visibility.Visible;
         }
 
         private void GroshySignIn_Click(object sender, RoutedEventArgs e)
         {
-            GroshyModel.shared.GetUser(GroshyLogin.Text, GroshyPassword.Text);
+            converter.Password = GroshyPassword.Password;
+            GroshyModel.shared.GetUser(GroshyLogin.Text, converter.Password);
             if(GroshyModel.shared.user.Id != 0)
             {
+                MainWindow main = new MainWindow();
+                main.Show();
                 Close();
             }
             else
             {
                 MessageBox.Show("Неправильно введён логин или пароль!");
             }
+        }
+
+        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
+        {
+            //GroshyPassword.;
         }
     }
 }

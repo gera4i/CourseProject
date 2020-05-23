@@ -51,15 +51,15 @@
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,86,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
 
         </Border>
-        <TextBox x:Name="GroshyNameOfCategory"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="GroshyLogin"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,157,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
-        <TextBox x:Name="GroshyNameOfCategory_Copy"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,157,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="GroshyPassword1"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,157,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,228,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
-        <TextBox x:Name="GroshyNameOfCategory_Copy1"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,228,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="GroshyPassword2"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,228,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
         <Label Foreground="White" Content="Логин" HorizontalAlignment="Left" Margin="110,63,0,0" VerticalAlignment="Top"/>
         <Label Foreground="White" Content="Пароль" HorizontalAlignment="Left" Margin="110,131,0,0" VerticalAlignment="Top"/>
         <Label Foreground="White" Content="Подтвердите пароль" HorizontalAlignment="Left" Margin="110,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="GroshyAddCategory" Content="Зарегистрироваться" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,285,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyAddCategory_Click"/>
+        <Button x:Name="GroshyRegister" Content="Зарегистрироваться" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,285,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyRegister_Click"/>
 
     </Grid>
 </Window>
