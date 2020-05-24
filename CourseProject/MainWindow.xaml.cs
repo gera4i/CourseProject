@@ -28,7 +28,6 @@ namespace CourseProject
     {
         Transaction transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
         private bool isTransactionExpense = true;
-        private bool sortFlag = true;
         public MainWindow()
         {
             GroshyModel.shared.LoadData();
@@ -52,7 +51,7 @@ namespace CourseProject
                 GroshyComboBoxAccountSort.Items.Add(item.Name);
             }
 
-            GroshyDatePickerStart.Text = Convert.ToString(DateTime.Today);
+            GroshyDatePickerStart.Text = Convert.ToString(DateTime.Today.AddMonths(-1));
             GroshyDatePickerEnd.Text = Convert.ToString(DateTime.Today);
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
 
@@ -276,14 +275,18 @@ namespace CourseProject
                     }
                 }
             }
-
-            //foreach (var item in GroshyModel.shared.tempTransactionList)
-            //{
-            //    GroshyModel.shared.transactions.Add(item);
-            //}
-            //GroshyModel.shared.tempTransactionList.Clear();
-
-            SortInfo.Content = Info;
+            if(GroshyModel.shared.transactions.Count == 0)
+            {
+                SortInfo.Content = "Ничего не найдено :(";
+            }
+            else
+            {
+                SortInfo.Content = Info;
+            }
+            GroshyDatePickerEnd.Text = Convert.ToString(DateTime.Today);
+            GroshyDatePickerStart.Text = Convert.ToString(DateTime.Today.AddMonths(-1));
+            GroshyComboBoxCategorySort.Text = "Все категории";
+            GroshyComboBoxAccountSort.Text = "Все cчета";
         }
 
     }

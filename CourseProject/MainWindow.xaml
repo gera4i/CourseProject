@@ -561,7 +561,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="SortInfo" Content="Сортировать" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,396,0,-3" VerticalAlignment="Top" Width="624" Height="40"/>
+            <Button x:Name="SortInfo" Content="Все транзакици" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,396,0,-3" VerticalAlignment="Top" Width="624" Height="40"/>
 
         </Grid>
         <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden" />
