@@ -99,6 +99,9 @@ namespace CourseProject
             }
             GroshyNameOfAccount.Text = "Введите название счёта";
             GroshyNameOfAccount.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+            GroshySumOfAccount.Text = "Введите сумму счёта";
+            GroshySumOfAccount.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+
         }
 
         ///////////////// 

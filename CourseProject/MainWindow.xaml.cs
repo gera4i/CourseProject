@@ -105,7 +105,7 @@ namespace CourseProject
             GroshyModel.shared.AddTransaction(transaction);
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.accounts.ElementAt(0).SumOfAccount);
-            MessageBox.Show(Convert.ToString(GroshyModel.shared.transactions.ElementAt(0).Description));
+            MessageBox.Show("Успешно добавлено:)");
             transaction = new Transaction(true, 12, null, null, DateTime.Now, "ghbdtn");
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
         }
@@ -130,6 +130,22 @@ namespace CourseProject
             groshySettingsWindow.ShowDialog();
             GroshyBlure.Visibility = Visibility.Hidden;
             //darkwindow.Close();
+            foreach (var item in GroshyModel.shared.tempCategoriesList)
+            {
+                GroshyComboBoxCategory.Items.Add(item.Name);
+                GroshyComboBoxCategorySort.Items.Add(item.Name);
+            }
+            GroshyModel.shared.tempCategoriesList.Clear();
+            foreach (var item in GroshyModel.shared.tempCategoriesList)
+            {
+                GroshyComboBoxCategory.Items.Add(item.Name);
+                GroshyComboBoxCategorySort.Items.Add(item.Name);
+            }
+            foreach (var item in GroshyModel.shared.tempAccountsList)
+            {
+                GroshyComboBoxAccount.Items.Add(item.Name);
+                GroshyComboBoxAccountSort.Items.Add(item.Name);
+            }
 
         }
 

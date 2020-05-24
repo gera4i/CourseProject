@@ -23,10 +23,18 @@ namespace CourseProject
         public void AddCategory(int IsExpense, string Name)
         {
             groshyDataBase.AddCategory(IsExpense, Name);
+            bool flag;
+            if (IsExpense == 1)
+                flag = true;
+            else flag = false;
+            Category category = new Category(Name, flag);
+            tempCategoriesList.Add(category);
         }
         public void AddAccount(double Sum, string Name)
         {
             groshyDataBase.AddAccount(Sum, Name);
+            Account account = new Account(Name, Sum);
+            tempAccountsList.Add(account);
         }
         public void GetUser(string Login, string Password)
         {
@@ -78,8 +86,7 @@ namespace CourseProject
         public BindingList<Transaction> transactions = new BindingList<Transaction>();
         public List<Account> accounts = new List<Account>();
         public List<Category> categories = new List<Category>();
-
-        
-
+        public List<Category> tempCategoriesList = new List<Category>();
+        public List<Account> tempAccountsList = new List<Account>();
     }
 }
