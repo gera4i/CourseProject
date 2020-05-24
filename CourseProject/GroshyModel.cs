@@ -61,6 +61,7 @@ namespace CourseProject
                 transaction.Account.SumOfAccount += transaction.SumOfTransaction;
             }
             transactions.Add(transaction);
+            tempTransactionList.Add(transaction);
             groshyDataBase.AddTransactionToDB(transaction, user.Id);
         }
 
@@ -73,6 +74,7 @@ namespace CourseProject
             }
             return summary;
         }
+        public BindingList<Transaction> tempTransactionList = new BindingList<Transaction>();
         public BindingList<Transaction> transactions = new BindingList<Transaction>();
         public List<Account> accounts = new List<Account>();
         public List<Category> categories = new List<Category>();

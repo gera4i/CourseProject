@@ -18,6 +18,15 @@
                 </Border.Effect>
             </Border>
         </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate2">
+            <Border CornerRadius="00,0,10,10"  BorderThickness="0"
+                    Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" Foreground="White"/>
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.2"></DropShadowEffect>
+                </Border.Effect>
+            </Border>
+        </ControlTemplate>
         <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
             <Setter Property="Foreground" Value="#FF333333"/>
             <Setter Property="IsTodayHighlighted" Value="True"/>
@@ -222,6 +231,7 @@
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/> 
             <Setter Property="MinWidth" Value="120"/>
             <Setter Property="MinHeight" Value="20"/>
             <Setter Property="Foreground" Value="White"/>
@@ -389,7 +399,7 @@
                 </Border.Effect>-->
             </Border>
             <TextBox x:Name="GroshySumBox" HorizontalAlignment="Left" Foreground ="#8A8A8A" Height="40" Margin="197,10,0,0" TextWrapping="Wrap" Text=" Введите сумму..." VerticalAlignment="Top" Width="235" BorderThickness="0" Background="Transparent" PreviewMouseDown="GroshySumBox_PreviewMouseDown" PreviewKeyDown="GroshySumBox_PreviewKeyDown" PreviewTextInput="GroshySumBox_PreviewTextInput" />
-            <Border HorizontalAlignment="Left" Height="30" Margin="0,55,0,0" VerticalAlignment="Top" Width="170" BorderThickness="1" CornerRadius="9" Background="#0F559A" BorderBrush="#FFABADB3">
+            <Border HorizontalAlignment="Left" Height="30" Margin="0,55,0,0" VerticalAlignment="Top" Width="170"  CornerRadius="9" Background="#0F559A" BorderBrush="#FFABADB3">
                 <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="5" Opacity="0.25"></DropShadowEffect>
                 </Border.Effect>
@@ -432,10 +442,75 @@
         </Grid>
 
         <Grid HorizontalAlignment="Left" Height="587" Margin="10,10,0,0" VerticalAlignment="Top" Width="256">
+
             <Border CornerRadius="0" Background="#1683e0" BorderBrush="#FFABADB3" BorderThickness="1" >
                 <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.4"></DropShadowEffect>
                 </Border.Effect>
+                <Grid HorizontalAlignment="Left" Height="424" Margin="-0.8,80.2,-0.8,0" VerticalAlignment="Top" Width="256">
+
+                    <Border HorizontalAlignment="Left" Height="30" Margin="31,59,0,0" VerticalAlignment="Top" Width="170"  CornerRadius="9" Background="#0F559A" BorderBrush="#FFABADB3">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="5" Opacity="0.25"></DropShadowEffect>
+                        </Border.Effect>
+                    </Border>
+                    <DatePicker x:Name="GroshyDatePickerStart" HorizontalAlignment="Left" Height="26" Margin="70,63,0,0" VerticalAlignment="Top" Width="108" Style="{DynamicResource DatePickerStyle1}" FontSize="14">
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}"/>
+
+                                                <ScrollViewer Name="PART_ContentHost"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <Border HorizontalAlignment="Left" Height="30" Margin="31,121,0,0" VerticalAlignment="Top" Width="170"  CornerRadius="9" Background="#0F559A" BorderBrush="#FFABADB3">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="5" Opacity="0.25"/>
+                        </Border.Effect>
+                    </Border>
+                    <DatePicker x:Name="GroshyDatePickerEnd" HorizontalAlignment="Left" Height="26" Margin="70,125,0,0" VerticalAlignment="Top" Width="108" Style="{DynamicResource DatePickerStyle1}" FontSize="14">
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}"/>
+
+                                                <ScrollViewer x:Name="PART_ContentHost"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <ComboBox x:Name="GroshyComboBoxAccountSort"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  IsReadOnly="True"
+                      HorizontalAlignment="Left" Height="40" Margin="31,187,0,0" VerticalAlignment="Top" Width="170" />
+                    <ComboBox x:Name="GroshyComboBoxCategorySort" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  IsReadOnly="True"
+                        HorizontalAlignment="Left" Height="40" Margin="31,258,0,0" VerticalAlignment="Top" Width="170" />
+                    <Button x:Name="SortButton" Content="Сортировать" Template="{StaticResource btTemplate}" Background="#0F559A" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="SortButton_Click" RenderTransformOrigin="0.522,-0.505"/>
+                    <Label Content="Укажите начало периода:" Foreground="White" HorizontalAlignment="Left" Margin="31,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
+                    <Label Content="Укажите конец периода:" Foreground="White" HorizontalAlignment="Left" Margin="31,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
+                    <Label Content="Выберите счёт:" Foreground="White" HorizontalAlignment="Left" Margin="31,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
+                    <Label Content="Выберите категорию:" Foreground="White" HorizontalAlignment="Left" Margin="32,232,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
+                </Grid>
 
             </Border>
             <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,509,1,-14">
@@ -446,16 +521,12 @@
                 <Label Foreground="White" x:Name="GroshySumOfAccounts" Content="Summa" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="35" Margin="1,0,-0.6,0.2"/>
 
             </Border>
-            <Label Content="Продукты" Foreground="White" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
-            <Label Content="Кафе" Foreground="White" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
-            <Label Content="Жильё" Foreground="White" HorizontalAlignment="Left" Margin="10,311,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
-            <Label Content="Покупки" Foreground="White" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top" BorderBrush="#0F579F" BorderThickness="0,0,0,1.5" Height="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="236" FontSize="24"/>
 
 
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="418" Margin="313,179,0,0" VerticalAlignment="Top" Width="647">
+        <Grid HorizontalAlignment="Left" Height="433" Margin="313,179,0,0" VerticalAlignment="Top" Width="647">
 
-              <Border Height="396" HorizontalAlignment="Left" Margin="-10,0,0,0"  Width="646" VerticalAlignment="Top" CornerRadius="12" Background="White" BorderBrush="White" BorderThickness="0">
+            <Border Height="396" HorizontalAlignment="Left" Margin="-10,0,0,0"  Width="646" VerticalAlignment="Top" CornerRadius="12" Background="White" BorderBrush="White" BorderThickness="0">
                 <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.4"></DropShadowEffect>
                 </Border.Effect>
@@ -490,37 +561,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-          
-            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,388,10,-10" Foreground="White">
-                <TabControl.Resources>
-                    <Style TargetType="TabItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="TabItem">
-                                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="0,0,4,4" Margin="2,0">
-                                        <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Border" Property="Background" Value="#1683e0" />
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="False">
-                                            <Setter TargetName="Border" Property="Background" Value="#0F559A" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabControl.Resources>
-                <TabItem x:Name="tab1" Header="Все счета" Foreground="White" Height="30" FontSize="14" Margin="0,0,-315.6,0.4">
-                </TabItem>
-            </TabControl>
+            <Button x:Name="SortInfo" Content="Сортировать" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,396,0,-3" VerticalAlignment="Top" Width="624" Height="40"/>
 
         </Grid>
         <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden" />

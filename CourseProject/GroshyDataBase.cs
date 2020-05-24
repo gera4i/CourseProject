@@ -141,6 +141,7 @@ namespace CourseProject
                 }
             }
         }
+       
         public void GetUser(string Login, string Password, User user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -237,6 +238,7 @@ namespace CourseProject
                             }
                             Transaction transaction = new Transaction(isExpenceFlag, tempSum, acc, cat, tempDate, tempDiscription );
                             GroshyModel.shared.transactions.Add(transaction);
+                            GroshyModel.shared.tempTransactionList.Add(transaction);
                         }
                     }
                 }

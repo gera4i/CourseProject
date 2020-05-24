@@ -28,33 +28,32 @@ namespace CourseProject
     {
         Transaction transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
         private bool isTransactionExpense = true;
+        private bool sortFlag = true;
         public MainWindow()
         {
             GroshyModel.shared.LoadData();
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
+            GroshyComboBoxCategorySort.Items.Add("Все категории");
+            GroshyComboBoxCategorySort.Text = "Все категории";
             foreach (var item in GroshyModel.shared.categories)
             {
                 if (item.IsExpense)
+                {
                     GroshyComboBoxCategory.Items.Add(item.Name);
+                    GroshyComboBoxCategorySort.Items.Add(item.Name);
+                }
             }
+            GroshyComboBoxAccountSort.Items.Add("Все cчета");
+            GroshyComboBoxAccountSort.Text = "Все cчета";
             foreach (var item in GroshyModel.shared.accounts)
             {
                 GroshyComboBoxAccount.Items.Add(item.Name);
+                GroshyComboBoxAccountSort.Items.Add(item.Name);
             }
-            int i = 0;
-            foreach (var item in GroshyModel.shared.accounts)
-            {
-                i++;
-                GroshyTabControl.Items.Add(new TabItem
-                {
-                    Name = "a" + i,
-                    Header = item.Name,
-                    Height = 30,
-                    FontSize = 14
-                }); ;
-            }
-             
+
+            GroshyDatePickerStart.Text = Convert.ToString(DateTime.Today);
+            GroshyDatePickerEnd.Text = Convert.ToString(DateTime.Today);
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
 
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
@@ -112,20 +111,7 @@ namespace CourseProject
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            foreach (var item in GroshyModel.shared.accounts)
-            {
-                int i = 0;
-                TabItem newTabItem = new TabItem
-                {
-                    Header = item.Name,
-                    Name = "a" + i
-                    };
-                    GroshyTabControl.Items.Add(newTabItem);
-                i++;
-            }
-        }
+      
 
         private void GroshySumOfAccounts_Copy_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -173,19 +159,132 @@ namespace CourseProject
 
         }
 
+        private void SortButton_Click(object sender, RoutedEventArgs e)
+        {
+            GroshyModel.shared.transactions.Clear();
+            foreach (var item in GroshyModel.shared.tempTransactionList)
+            {
+                GroshyModel.shared.transactions.Add(item);
+            }
+            if (GroshyDatePickerStart.SelectedDate > GroshyDatePickerEnd.SelectedDate)
+            {
+                MessageBox.Show("Неправильно введена дата!");
+                return;
+            }
+            string Info = "";
+            if (GroshyComboBoxCategorySort.Text == "Все категории" && GroshyComboBoxAccountSort.Text == "Все cчета")
+            {
+                if (isTransactionExpense)
+                {
+                    Info += "Расходы ";
+                }
+                else
+                {
+                    Info += "Доходы ";
+                }
+            }
+            else
+            {
+                if (GroshyComboBoxCategorySort.Text == "Все категории")
+                {
+                    Info += "Расходы по счёту '" + GroshyComboBoxAccountSort.Text + "' ";
+                    foreach (var item in GroshyModel.shared.transactions.ToList())
+                    {
+                        if (item.Account.Name != GroshyComboBoxAccountSort.Text)
+                        {
+                            GroshyModel.shared.transactions.Remove(item);
+                        }
+                    }
+                }
+                else if (GroshyComboBoxAccountSort.Text == "Все cчета")
+                {
+                    if (isTransactionExpense)
+                    {
+                        Info += "Расходы по категории ";
+                        Info += "'" + GroshyComboBoxCategorySort.Text + "' ";
+                    }
+                    else
+                    {
+                        Info += "Доходы по категории ";
+                        Info += "'" + GroshyComboBoxCategorySort.Text + "' ";
+                    }
+                    foreach (var item in GroshyModel.shared.transactions.ToList())
+                    {
+                        if (item.Category.Name != GroshyComboBoxCategorySort.Text)
+                        {
+                            GroshyModel.shared.transactions.Remove(item);
+                        }
+                    }
+                }
+                else
+                {
+                    if (isTransactionExpense)
+                    {
+                        Info += "Расходы по категории ";
+                        Info += "'" + GroshyComboBoxCategorySort.Text + "' ";
+                    }
+                    else
+                    {
+                        Info += "Доходы по категории";
+                        Info += "'" + GroshyComboBoxCategorySort.Text + "' ";
+                    }
 
+                    Info += "по счёту '" + GroshyComboBoxAccountSort.Text + "' ";
 
+                    foreach (var item in GroshyModel.shared.transactions.ToList())
+                    {
+                        if (item.Category.Name != GroshyComboBoxCategorySort.Text)
+                        {
+                            GroshyModel.shared.transactions.Remove(item);
+                        }
+                    }
+                    foreach (var item in GroshyModel.shared.transactions.ToList())
+                    {
+                        if (item.Account.Name != GroshyComboBoxAccountSort.Text)
+                        {
+                            GroshyModel.shared.transactions.Remove(item);
+                        }
+                    }
+                }
+            }
+            if (GroshyDatePickerStart.SelectedDate != GroshyDatePickerEnd.SelectedDate)
+            {
+                Info += "за период с " + GroshyDatePickerStart.SelectedDate.ToString().Replace("00:00:00", "") + " по " + GroshyDatePickerEnd.SelectedDate.ToString().Replace("00:00:00", "");
+                foreach (var item in GroshyModel.shared.transactions.ToList())
+                {
+                    if (item.Date >= GroshyDatePickerEnd.SelectedDate.Value.AddDays(1))
+                    {
+                        GroshyModel.shared.transactions.Remove(item);
+                    }
+                }
+                foreach (var item in GroshyModel.shared.transactions.ToList())
+                {
+                    if (item.Date <= GroshyDatePickerStart.SelectedDate.Value.AddDays(-1))
+                    {
+                        GroshyModel.shared.transactions.Remove(item);
+                    }
+                }
+            }
+            else
+            {
+                Info += "за " + GroshyDatePickerStart.SelectedDate.ToString().Replace("00:00:00", "");
+                foreach (var item in GroshyModel.shared.transactions.ToList())
+                {
+                    if (item.Date != GroshyDatePickerStart.SelectedDate)
+                    {
+                        GroshyModel.shared.transactions.Remove(item);
+                    }
+                }
+            }
 
-        // ДОБАВЛЕНИЕ КНОПКОЙ НОВОЙ ВКЛАДКИ 
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
+            //foreach (var item in GroshyModel.shared.tempTransactionList)
+            //{
+            //    GroshyModel.shared.transactions.Add(item);
+            //}
+            //GroshyModel.shared.tempTransactionList.Clear();
 
-        //    TabItem newTabItem = new TabItem
-        //    {
-        //        Header = "Test",
-        //        Name = "Test"
-        //    };
-        //    GroshyTabControl.Items.Add(newTabItem);
-        //}
+            SortInfo.Content = Info;
+        }
+
     }
 }
