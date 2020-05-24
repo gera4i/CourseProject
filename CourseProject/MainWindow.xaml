@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Groshy" Height="650" Width="1000">
+        Title="Groshy" Height="682.4" Width="1000">
 
     <Window.Resources>
 
@@ -438,7 +438,7 @@
                 </Border.Effect>
 
             </Border>
-            <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,509,1,1">
+            <Border CornerRadius="0" Background="#0F559A" BorderBrush="#FFABADB3" BorderThickness="0" Margin="1,509,1,-14">
                 <Label  Foreground="White" x:Name="GroshySumOfAccounts_Copy" Content="Настройки" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="254" FontSize="18" Margin="0,0,0.4,-0.2" PreviewMouseDown="GroshySumOfAccounts_Copy_PreviewMouseDown"/>
 
             </Border>
@@ -454,12 +454,44 @@
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="418" Margin="313,179,0,0" VerticalAlignment="Top" Width="647">
-            <Border Height="396" HorizontalAlignment="Left" Margin="-10,0,0,0"  Width="646" VerticalAlignment="Top" CornerRadius="12" Background="White" BorderBrush="White" BorderThickness="0">
+
+              <Border Height="396" HorizontalAlignment="Left" Margin="-10,0,0,0"  Width="646" VerticalAlignment="Top" CornerRadius="12" Background="White" BorderBrush="White" BorderThickness="0">
                 <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.4"></DropShadowEffect>
                 </Border.Effect>
             </Border>
-            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,0,10,0" >
+            <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="367" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" BorderThickness="0" Margin="10,10,0,0">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0 1 0 1"/>
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="Height" Value="auto" />
+                        <Setter Property="Width" Value="auto"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns >
+                    <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name}" Width="118"/>
+                    <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name}" Width="119" />
+                    <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction}" Width="118" />
+                    <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date}" Width="119" />
+                    <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description}" Width="125">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+          
+            <TabControl x:Name="GroshyTabControl" TabStripPlacement="Bottom" BorderThickness="0" Background="Transparent" Margin="0,388,10,-10" Foreground="White">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -486,44 +518,12 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem x:Name="tab1" Header="tab1" >
-                    <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" BorderThickness="0" Margin="10,10,0,0">
-                        <DataGrid.Resources>
-                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="Foreground" Value="Black" />
-                                <Setter Property="BorderBrush" Value="Black"/>
-                                <Setter Property="BorderThickness" Value="0 1 0 1"/>
-                                <Setter Property="Margin" Value="0" />
-                                <Setter Property="Height" Value="auto" />
-                                <Setter Property="Width" Value="auto"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-
-                        </DataGrid.Resources>
-
-                        <DataGrid.Columns >
-                            <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name}" Width="118"/>
-                            <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name}" Width="119" />
-                            <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction}" Width="118" />
-                            <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date}" Width="119" />
-                            <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description}" Width="125">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </TabItem>
-                <TabItem x:Name="tab2" Header="tab1">
+                <TabItem x:Name="tab1" Header="Все счета" Foreground="White" Height="30" FontSize="14" Margin="0,0,-315.6,0.4">
                 </TabItem>
             </TabControl>
 
         </Grid>
-        <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden"/>
+        <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden" />
 
 
 

@@ -42,7 +42,19 @@ namespace CourseProject
             {
                 GroshyComboBoxAccount.Items.Add(item.Name);
             }
-
+            int i = 0;
+            foreach (var item in GroshyModel.shared.accounts)
+            {
+                i++;
+                GroshyTabControl.Items.Add(new TabItem
+                {
+                    Name = "a" + i,
+                    Header = item.Name,
+                    Height = 30,
+                    FontSize = 14
+                }); ;
+            }
+             
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
 
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
