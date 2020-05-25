@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Регистрация" Height="400" Width="400" ResizeMode="NoResize"
+        Title="Регистрация" Height="425" Width="257" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" >
@@ -48,19 +48,19 @@
             </Border>
         </ControlTemplate>
     </Window.Resources>
-    <Grid Background="#0F559A">
-        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,86,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
+    <Grid Background="#0F559A" Margin="0,0,0.2,0">
+        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,122,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
 
         </Border>
-        <TextBox x:Name="GroshyLogin"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
-        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,157,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
-        <TextBox x:Name="GroshyPassword1"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,157,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
-        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,228,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
-        <TextBox x:Name="GroshyPassword2"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,228,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
-        <Label Foreground="White" Content="Логин" HorizontalAlignment="Left" Margin="110,63,0,0" VerticalAlignment="Top"/>
-        <Label Foreground="White" Content="Пароль" HorizontalAlignment="Left" Margin="110,131,0,0" VerticalAlignment="Top"/>
-        <Label Foreground="White" Content="Подтвердите пароль" HorizontalAlignment="Left" Margin="110,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="GroshyRegister" Content="Зарегистрироваться" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,285,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyRegister_Click"/>
+        <TextBox x:Name="GroshyLogin"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="42,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,193,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
+        <TextBox x:Name="GroshyPassword1"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="42,193,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,264,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
+        <TextBox x:Name="GroshyPassword2"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="42,263,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <Label Foreground="White" Content="Логин" HorizontalAlignment="Left" Margin="42,99,0,0" VerticalAlignment="Top"/>
+        <Label Foreground="White" Content="Пароль" HorizontalAlignment="Left" Margin="42,167,0,0" VerticalAlignment="Top"/>
+        <Label Foreground="White" Content="Подтвердите пароль" HorizontalAlignment="Left" Margin="42,233,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="GroshyRegister" Content="Зарегистрироваться" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="42,321,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyRegister_Click"/>
 
     </Grid>
 </Window>

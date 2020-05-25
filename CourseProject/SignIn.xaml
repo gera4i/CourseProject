@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Вход" Height="450" Width="400"
+        Title="Вход" Height="425" Width="257"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-       <ControlTemplate TargetType="Button" x:Key="btTemplate">
+        <ControlTemplate TargetType="Button" x:Key="btTemplate">
             <Border CornerRadius="12" BorderBrush="#FFABADB3" BorderThickness="0"
                     Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
                 <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" Foreground="White"/>
@@ -19,16 +19,16 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid  Background="#0F559A">
-        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,86,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
+        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,146,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
 
         </Border>
-        <TextBox x:Name="GroshyLogin"  Foreground ="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
-        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,157,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
-        <PasswordBox x:Name="GroshyPassword" PasswordChar="⚫" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Margin="110,157,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
-        <Button x:Name="GroshySignIn" Content="Вход" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,217,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshySignIn_Click" RenderTransformOrigin="0.535,-0.2" />
-        <Button x:Name="GroshyRegister" Content="Регистрация" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,384,0,0" VerticalAlignment="Top" Width="169" Height="26" Click="GroshyRegister_Click" />
-        <Label Content="Логин" Foreground="White" HorizontalAlignment="Left" Margin="110,63,0,0" VerticalAlignment="Top"/>
-        <Label Content="Пароль" Foreground="White" HorizontalAlignment="Left" Margin="110,131,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="GroshyLogin"  Foreground ="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="41,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,217,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
+        <PasswordBox x:Name="GroshyPassword" PasswordChar="⚫" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Margin="41,217,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <Button x:Name="GroshySignIn" Content="Вход" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="41,277,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshySignIn_Click" RenderTransformOrigin="0.535,-0.2" />
+        <Button x:Name="GroshyRegister" Content="Регистрация" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="42,337,0,0" VerticalAlignment="Top" Width="169" Height="26" Click="GroshyRegister_Click" />
+        <Label Content="Логин" Foreground="White" HorizontalAlignment="Left" Margin="41,123,0,0" VerticalAlignment="Top"/>
+        <Label Content="Пароль" Foreground="White" HorizontalAlignment="Left" Margin="41,191,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
