@@ -48,7 +48,7 @@
             </Border>
         </ControlTemplate>
     </Window.Resources>
-    <Grid Background="#0F559A" Margin="0,0,0.2,0">
+    <Grid Background="#0F559A">
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,122,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
 
         </Border>
@@ -61,6 +61,7 @@
         <Label Foreground="White" Content="Пароль" HorizontalAlignment="Left" Margin="42,167,0,0" VerticalAlignment="Top"/>
         <Label Foreground="White" Content="Подтвердите пароль" HorizontalAlignment="Left" Margin="42,233,0,0" VerticalAlignment="Top"/>
         <Button x:Name="GroshyRegister" Content="Зарегистрироваться" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="42,321,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyRegister_Click"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="77,10,0,0" VerticalAlignment="Top" Width="100" Source="BackLogo.jpg"/>
 
     </Grid>
 </Window>

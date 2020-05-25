@@ -29,6 +29,6 @@
         <Button x:Name="GroshyRegister" Content="Регистрация" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="42,337,0,0" VerticalAlignment="Top" Width="169" Height="26" Click="GroshyRegister_Click" />
         <Label Content="Логин" Foreground="White" HorizontalAlignment="Left" Margin="41,123,0,0" VerticalAlignment="Top"/>
         <Label Content="Пароль" Foreground="White" HorizontalAlignment="Left" Margin="41,191,0,0" VerticalAlignment="Top"/>
-
+        <Image HorizontalAlignment="Left" Height="100" Margin="77,18,0,0" VerticalAlignment="Top" Width="100" Source="BackLogo.jpg"/>
     </Grid>
 </Window>
