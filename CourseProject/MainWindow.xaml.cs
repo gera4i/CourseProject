@@ -352,6 +352,7 @@ namespace CourseProject
             GroshyDatePickerStart.Text = Convert.ToString(DateTime.Today.AddMonths(-1));
             GroshyComboBoxCategorySort.Text = "Все категории";
             GroshyComboBoxAccountSort.Text = "Все cчета";
+            Delete.Visibility = Visibility.Hidden;
         }
 
         private void GroshySumBox_GotFocus(object sender, RoutedEventArgs e)
@@ -397,7 +398,7 @@ namespace CourseProject
         }
         private void GroshyDataGrid_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(GroshyDataGrid.SelectedItems.Count != 1)
+            if(GroshyDataGrid.SelectedItems.Count != 1 || GroshyDataGrid.SelectedItems == null)
             {
                 Delete.Visibility = Visibility.Hidden;
             }
@@ -423,6 +424,7 @@ namespace CourseProject
                 GroshyModel.shared.transactions.Add(item);
             }
             SortInfo.Content = "Все транзакции";
+            Delete.Visibility = Visibility.Hidden;
         }
     }
 }
