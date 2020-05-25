@@ -41,6 +41,7 @@ namespace CourseProject
 
         private void GroshyAddCategory_Click(object sender, RoutedEventArgs e)
         {
+            GroshyDeleteCategoryComboBox.Items.Clear();
             string tempStr = GroshyNameOfCategory.Text.Trim().ToLower();
             bool flag = true;
             while (flag)
@@ -66,6 +67,10 @@ namespace CourseProject
                             {
                                 GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
                             }
+                            foreach (var item in GroshyModel.shared.categories)
+                            {
+                                GroshyDeleteCategoryComboBox.Items.Add(item.Name);
+                            }
                         }
                         else
                         {
@@ -90,7 +95,7 @@ namespace CourseProject
 
         private void GroshyAddAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            GroshyDeleteAccountComboBox.Items.Clear();
             string NameOfAccount = GroshyNameOfAccount.Text.Trim().ToLower();
             double Summa = 0;
             bool flag = true;
@@ -120,6 +125,10 @@ namespace CourseProject
                 if (GroshyModel.shared.accounts.Find(x => x.Name == NameOfAccount) == null)
                 {
                     GroshyModel.shared.AddAccount(Summa, NameOfAccount);
+                    foreach (var item in GroshyModel.shared.accounts)
+                    {
+                        GroshyDeleteAccountComboBox.Items.Add(item.Name);
+                    }
                 }
                 else
                 {
@@ -240,7 +249,7 @@ namespace CourseProject
             }
             else
             {
-                MessageBox.Show("Выберите категорию!");
+                MessageBox.Show("Выберите счёт!");
             }
         }
 

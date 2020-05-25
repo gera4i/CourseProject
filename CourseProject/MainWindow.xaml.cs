@@ -41,8 +41,8 @@ namespace CourseProject
                 if (item.IsExpense)
                 {
                     GroshyComboBoxCategory.Items.Add(item.Name);
-                    GroshyComboBoxCategorySort.Items.Add(item.Name);
                 }
+                GroshyComboBoxCategorySort.Items.Add(item.Name);
             }
             GroshyComboBoxAccountSort.Items.Add("Все cчета");
             GroshyComboBoxAccountSort.Text = "Все cчета";
@@ -176,8 +176,8 @@ namespace CourseProject
                 if (item.IsExpense)
                 {
                     GroshyComboBoxCategory.Items.Add(item.Name);
-                    GroshyComboBoxCategorySort.Items.Add(item.Name);
                 }
+                GroshyComboBoxCategorySort.Items.Add(item.Name);
             }
             foreach (var item in GroshyModel.shared.accounts)
             {
@@ -413,6 +413,16 @@ namespace CourseProject
             {
                 GroshyModel.shared.DeleteTransaction(GroshyModel.shared.transactions[GroshyDataGrid.SelectedIndex]);
             }
+        }
+
+        private void SortInfo_Click(object sender, RoutedEventArgs e)
+        {
+            GroshyModel.shared.transactions.Clear();
+            foreach (var item in GroshyModel.shared.tempTransactionList)
+            {
+                GroshyModel.shared.transactions.Add(item);
+            }
+            SortInfo.Content = "Все транзакции";
         }
     }
 }

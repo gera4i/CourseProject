@@ -22,7 +22,7 @@ namespace CourseProject
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 int number = command.ExecuteNonQuery();
-                MessageBox.Show("Добавлено объектов: " + number);
+                MessageBox.Show("Добавлена категория " + Name);
             }
         }
         public void AddAccount(double SumOfAccount, string Name) // аккаунт
@@ -34,8 +34,8 @@ namespace CourseProject
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
-                int number = command.ExecuteNonQuery();
-                MessageBox.Show("Добавлено объектов: " + number);
+                command.ExecuteNonQuery();
+                MessageBox.Show("Добавлен счёт " + Name);
             }
         }
         public void AddTransactionToDB(Transaction transaction, int id)
@@ -55,7 +55,7 @@ namespace CourseProject
             }
             string Summa = Convert.ToString(transaction.SumOfTransaction).Replace(",", ".");
             string sqlExpression1 = String.Format("INSERT INTO Transactions (IdUser, SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", id, Summa, transaction.Category.Name, transaction.Account.Name, convertDate, transaction.Description);
-            string sqlExpression2 = String.Format("UPDATE Accounts SET SumOfAccount = '{0}' WHERE Account = '{1}' and IdUser = {2}", Convert.ToString(transaction.Account.SumOfAccount).Replace(",", "."), transaction.Account.Name, 1);
+            string sqlExpression2 = String.Format("UPDATE Accounts SET SumOfAccount = {0} WHERE Account = '{1}' and IdUser = {2}", Convert.ToString(transaction.Account.SumOfAccount).Replace(",", "."), transaction.Account.Name, id);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -181,8 +181,7 @@ namespace CourseProject
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
-                    int number = command.ExecuteNonQuery();
-                    MessageBox.Show("Добавлено объектов: " + number);
+                    command.ExecuteNonQuery();
                 }
         }
         public void UpdateUser(User user)
@@ -205,7 +204,7 @@ namespace CourseProject
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 int number = command.ExecuteNonQuery();
-                MessageBox.Show("Удалена категория: " + category.Name);
+                MessageBox.Show("Удалена категория " + category.Name);
             }
         }
         public void DeleteAccount(Account account, int Id)
@@ -217,7 +216,7 @@ namespace CourseProject
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 int number = command.ExecuteNonQuery();
-                MessageBox.Show("Удален счёт: " + account.Name);
+                MessageBox.Show("Удален счёт " + account.Name);
             }
         }
         public void DeleteTransaction(Transaction transaction)
@@ -229,7 +228,7 @@ namespace CourseProject
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 int number = command.ExecuteNonQuery();
-                MessageBox.Show("Удаленa");
+                MessageBox.Show("Транзакция удалена");
             }
         }
 

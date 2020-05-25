@@ -377,7 +377,7 @@
         </Style>-->
     </Window.Resources>
 
-    <Grid Width="1000" Margin="0,0,-6.4,4">
+    <Grid Width="1000" Margin="0,0,-6.4,-1.2">
         <!--<Border CornerRadius="12" Background="White" BorderBrush="#FFABADB3" BorderThickness="1" Margin="271,6,31,492">
             <Border.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.2"></DropShadowEffect>
@@ -575,10 +575,10 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="Delete" Background="#D30000" Visibility="Hidden" Content="Удалить транзакцию" Template="{StaticResource btTemplate2}" HorizontalAlignment="Left" Margin="0,383,0,0" VerticalAlignment="Top" Width="624" Height="40" Click="Delete_Click" CommandParameter="{Binding Transaction}"/>
-            <Button x:Name="SortInfo" Content="Все транзакици" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="624" Height="35"/>
+            <Button x:Name="SortInfo" Content="Все транзакици" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="624" Height="35" Click="SortInfo_Click"/>
 
         </Grid>
-        <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.4" Visibility="Hidden" />
+        <StackPanel x:Name="GroshyBlure" Background="Black" Opacity="0.7" Visibility="Hidden" />
 
 
 
