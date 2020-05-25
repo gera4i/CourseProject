@@ -25,6 +25,7 @@ namespace CourseProject
             InitializeComponent();
             GroshyNameOfCategory.MaxLength = 19;
             GroshyNameOfAccount.MaxLength = 19;
+            GroshySumOfAccount.MaxLength = 9;
         }
 
 
@@ -45,14 +46,22 @@ namespace CourseProject
                 {
                     if (GroshyModel.shared.categories.Find(x => x.Name == tempStr) == null)
                     {
-                        if (Convert.ToBoolean(RadioButtonExpense.IsChecked))
+                        if (Regex.IsMatch(GroshyNameOfCategory.Text, @"^[a-zA-Zа-яА-Я0-9\s]*$"))
                         {
-                            GroshyModel.shared.AddCategory(1, GroshyNameOfCategory.Text);
+                            if (Convert.ToBoolean(RadioButtonExpense.IsChecked))
+                            {
+                                GroshyModel.shared.AddCategory(1, GroshyNameOfCategory.Text);
+                            }
+                            else
+                            {
+                                GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
+                            }
                         }
                         else
                         {
-                            GroshyModel.shared.AddCategory(0, GroshyNameOfCategory.Text);
+                            MessageBox.Show("Неверный формат категории!\n Используйте только буквы и цифры.");
                         }
+                           
                     }
                     else MessageBox.Show("Такая категория уже существует");
                 }
@@ -67,9 +76,11 @@ namespace CourseProject
             GroshyNameOfCategory.Text = "Введите название категории";
             GroshyNameOfCategory.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
         }
+        private Regex regex1 = new Regex("[^0-9\\,]+");
 
         private void GroshyAddAccount_Click(object sender, RoutedEventArgs e)
         {
+
             string NameOfAccount = GroshyNameOfAccount.Text.Trim().ToLower();
             double Summa = 0;
             bool flag = true;
@@ -77,7 +88,17 @@ namespace CourseProject
             {
                 if(GroshySumOfAccount.Text != "Введите сумму счёта")
                 {
-                    Summa = Convert.ToDouble(GroshySumOfAccount.Text);
+                    if (Regex.Match(GroshySumOfAccount.Text, @"^[0-9]{1,5}[,]?[0-9]{0,2}$").Success)
+                    {
+                        Summa = Convert.ToDouble(GroshySumOfAccount.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неправильный формат суммы");
+                        GroshyNameOfCategory.Text = "Введите сумму счёта";
+                        GroshyNameOfCategory.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+                        return;
+                    }
                 }
                 if (GroshyNameOfAccount.Text == "Введите название счёта" || NameOfAccount == "")
                 {
@@ -161,8 +182,10 @@ namespace CourseProject
             }
         }
 
- 
+
         private Regex regex = new Regex("[^0-9\\,]+");
+
+
         private void GroshySumOfAccount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = regex.IsMatch(e.Text);
@@ -171,6 +194,7 @@ namespace CourseProject
         private void GroshySumOfAccount_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = e.Key == Key.Space;
+
         }
     }
 }

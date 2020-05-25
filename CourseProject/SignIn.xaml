@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Вход" Height="450" Width="400">
+        Title="Вход" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
        <ControlTemplate TargetType="Button" x:Key="btTemplate">
             <Border CornerRadius="12" BorderBrush="#FFABADB3" BorderThickness="0"
@@ -21,7 +22,7 @@
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,86,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0">
 
         </Border>
-        <TextBox x:Name="GroshyLogin"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="GroshyLogin"  Foreground ="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="110,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
         <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,157,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
         <PasswordBox x:Name="GroshyPassword" PasswordChar="⚫" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Margin="110,157,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent"/>
         <Button x:Name="GroshySignIn" Content="Вход" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="110,217,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshySignIn_Click" RenderTransformOrigin="0.535,-0.2" />

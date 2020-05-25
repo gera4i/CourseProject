@@ -28,13 +28,13 @@ namespace CourseProject
                 flag = true;
             else flag = false;
             Category category = new Category(Name, flag);
-            tempCategoriesList.Add(category);
+            categories.Add(category);
         }
         public void AddAccount(double Sum, string Name)
         {
             groshyDataBase.AddAccount(Sum, Name);
             Account account = new Account(Name, Sum);
-            tempAccountsList.Add(account);
+            accounts.Add(account);
         }
         public void GetUser(string Login, string Password)
         {
@@ -73,20 +73,35 @@ namespace CourseProject
             groshyDataBase.AddTransactionToDB(transaction, user.Id);
         }
 
-        public double CountMoney()
+        public double CountMoney(string flag)
         {
-            double summary = 0; // начало пробного примера
-            foreach (var item in accounts)
+            double summary = 0;
+
+            if (flag == "")
             {
-                summary += item.SumOfAccount;
+                foreach (var item in accounts)
+                {
+                    summary += item.SumOfAccount;
+                }
             }
+            else
+            {
+                summary = accounts.Find(item => item.Name == flag).SumOfAccount;
+            }
+
+          
             return summary;
+        }
+        public int DayX = 30;
+        public double MoneyPerMounth()
+        {
+            int period = Math.Abs(DateTime.Today.Day - DayX);
+            double X = Math.Round(CountMoney("") / period, 2);
+            return X;
         }
         public BindingList<Transaction> tempTransactionList = new BindingList<Transaction>();
         public BindingList<Transaction> transactions = new BindingList<Transaction>();
         public List<Account> accounts = new List<Account>();
         public List<Category> categories = new List<Category>();
-        public List<Category> tempCategoriesList = new List<Category>();
-        public List<Account> tempAccountsList = new List<Account>();
     }
 }

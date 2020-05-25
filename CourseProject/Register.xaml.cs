@@ -26,9 +26,11 @@ namespace CourseProject
         {
             InitializeComponent();
             GroshyLogin.MaxLength = 19;
+            GroshyPassword1.MaxLength = 8;
+            GroshyPassword2.MaxLength = 8;
         }
 
-    
+
         private void GroshyRegister_Click(object sender, RoutedEventArgs e)
         {
 

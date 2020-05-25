@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Настройки" Height="600" Width="400" ResizeMode="NoResize">
+        Title="Настройки" Height="600" Width="408.4" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" >
             <Setter Property="Template">

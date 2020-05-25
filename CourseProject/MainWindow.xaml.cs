@@ -55,9 +55,12 @@ namespace CourseProject
             GroshyDatePickerEnd.Text = Convert.ToString(DateTime.Today);
             GroshyDatePicker.Text = Convert.ToString(DateTime.Today);
 
-            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
+            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
 
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
+            AvgPerDay.Text = Convert.ToString(GroshyModel.shared.MoneyPerMounth());
+            GroshyDescritptionBox.MaxLength = 49; 
+            GroshySumBox.MaxLength = 20;
         }
     
 
@@ -69,7 +72,6 @@ namespace CourseProject
             isTransactionExpense = true;
             (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#1683e0");
             GroshyIncome.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0F559A");
-            //  GroshyComboBoxCategory.SelectedItem = 
             GroshyComboBoxCategory.Items.Clear();
             foreach (var item in GroshyModel.shared.categories)
             {
@@ -91,75 +93,98 @@ namespace CourseProject
                     GroshyComboBoxCategory.Items.Add(item.Name);
             }
         }
-       
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void AddTransactionButton_Click(object sender, RoutedEventArgs e)
         {
             transaction.IsExpense = isTransactionExpense;
+            if (GroshyComboBoxAccount.Text == "")
+            {
+                MessageBox.Show("Укажите счёт");
+                return;
+            }
+            if (GroshyComboBoxCategory.Text == "")
+            {
+                MessageBox.Show("Укажите категорию");
+                return;
+            }
+            if (GroshySumBox.Text == " Введите сумму...")
+            {
+                MessageBox.Show("Вы не указали сумму");
+                return;
+            }
+            if(!Regex.Match(GroshySumBox.Text, @"^[0-9]{1,5}[,]?[0-9]{0,2}$").Success)
+            {
+                MessageBox.Show("Неправильный формат суммы!");
+                return;
+            }
+            if (!Regex.IsMatch(GroshyDescritptionBox.Text, @"^[a-zA-Zа-яА-Я0-9\s]*$"))
+            {
+                MessageBox.Show("Неправильный формат описания!\nПожалуйста, используйте только буквы и цифры");
+                return;
+            }
 
             transaction.Account = GroshyModel.shared.accounts.Find(item => item.Name == GroshyComboBoxAccount.Text);
             transaction.Category = GroshyModel.shared.categories.Find(item => item.Name == GroshyComboBoxCategory.Text);
-            
             transaction.Date = (DateTime)GroshyDatePicker.SelectedDate;
-            transaction.Description = GroshyDescritptionBox.Text;
+            if (GroshyDescritptionBox.Text == " Описание")
+            {
+                transaction.Description = "";
+            }
+            else
+            {
+                transaction.Description = GroshyDescritptionBox.Text;
+            }
+
             transaction.SumOfTransaction = Convert.ToDouble(GroshySumBox.Text);
             GroshyModel.shared.AddTransaction(transaction);
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
-            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.accounts.ElementAt(0).SumOfAccount);
+            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
+            AvgPerDay.Text = Convert.ToString(GroshyModel.shared.MoneyPerMounth());
+            GroshySumBox.Text = " Введите сумму...";
+            GroshySumBox.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+            GroshyDescritptionBox.Text = " Описание";
+            GroshyDescritptionBox.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+            GroshyComboBoxAccount.Text = "";
+            GroshyComboBoxCategory.Text = "";
             MessageBox.Show("Успешно добавлено:)");
-            transaction = new Transaction(true, 12, null, null, DateTime.Now, "ghbdtn");
-            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney());
+            transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
         }
 
       
 
-        private void GroshySumOfAccounts_Copy_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void GroshySettings_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
 
             GroshyBlure.Visibility = Visibility.Visible; 
             GroshySettingsWindow groshySettingsWindow = new GroshySettingsWindow();
-            //var darkwindow = new Window()
-            //{
-            //    Background = Brushes.Black,
-            //    Opacity = 0.4,
-            //    AllowsTransparency = true,
-            //    WindowStyle = WindowStyle.None,
-            //    WindowState = WindowState.Normal,
-            //    Topmost = true
-            //};
-            //darkwindow.Show();
             groshySettingsWindow.ShowDialog();
             GroshyBlure.Visibility = Visibility.Hidden;
-            //darkwindow.Close();
-            foreach (var item in GroshyModel.shared.tempCategoriesList)
+            GroshyComboBoxCategory.Items.Clear();
+            GroshyComboBoxCategorySort.Items.Clear();
+            GroshyComboBoxAccount.Items.Clear();
+            GroshyComboBoxAccountSort.Items.Clear();
+            foreach (var item in GroshyModel.shared.categories)
             {
-                GroshyComboBoxCategory.Items.Add(item.Name);
-                GroshyComboBoxCategorySort.Items.Add(item.Name);
+                if (item.IsExpense)
+                {
+                    GroshyComboBoxCategory.Items.Add(item.Name);
+                    GroshyComboBoxCategorySort.Items.Add(item.Name);
+                }
             }
-            GroshyModel.shared.tempCategoriesList.Clear();
-            foreach (var item in GroshyModel.shared.tempCategoriesList)
-            {
-                GroshyComboBoxCategory.Items.Add(item.Name);
-                GroshyComboBoxCategorySort.Items.Add(item.Name);
-            }
-            foreach (var item in GroshyModel.shared.tempAccountsList)
+            foreach (var item in GroshyModel.shared.accounts)
             {
                 GroshyComboBoxAccount.Items.Add(item.Name);
                 GroshyComboBoxAccountSort.Items.Add(item.Name);
             }
-
+            GroshyComboBoxCategorySort.Items.Add("Все категории");
+            GroshyComboBoxCategorySort.Text = "Все категории";
+            GroshyComboBoxAccountSort.Items.Add("Все cчета");
+            GroshyComboBoxAccountSort.Text = "Все cчета";
+            GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
+            AvgPerDay.Text = Convert.ToString(GroshyModel.shared.MoneyPerMounth());
         }
 
-        private void GroshyDescritptionBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            GroshyDescritptionBox.Text = "";
-            GroshyDescritptionBox.Foreground = Brushes.Black;
-        }
 
-        private void GroshySumBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            GroshySumBox.Text = "";
-            GroshySumBox.Foreground = Brushes.Black;
-        }
 
         private void GroshySumBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -197,6 +222,7 @@ namespace CourseProject
                 {
                     Info += "Доходы ";
                 }
+                GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
             }
             else
             {
@@ -210,6 +236,8 @@ namespace CourseProject
                             GroshyModel.shared.transactions.Remove(item);
                         }
                     }
+                    GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
+
                 }
                 else if (GroshyComboBoxAccountSort.Text == "Все cчета")
                 {
@@ -260,6 +288,7 @@ namespace CourseProject
                             GroshyModel.shared.transactions.Remove(item);
                         }
                     }
+                    GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
                 }
             }
             if (GroshyDatePickerStart.SelectedDate != GroshyDatePickerEnd.SelectedDate)
@@ -305,5 +334,54 @@ namespace CourseProject
             GroshyComboBoxAccountSort.Text = "Все cчета";
         }
 
+        private void GroshySumBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (GroshySumBox.Text == " Введите сумму...")
+            {
+                GroshySumBox.Text = "";
+                GroshySumBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void GroshyDescritptionBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(GroshyDescritptionBox.Text == " Описание")
+            {
+                GroshyDescritptionBox.Text = "";
+                GroshyDescritptionBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void GroshyDescritptionBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (GroshyDescritptionBox.Text == "")
+            {
+                GroshyDescritptionBox.Text = " Описание";
+                GroshyDescritptionBox.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+            }
+
+        }
+
+        private void GroshySumBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (GroshySumBox.Text == "")
+            {
+                GroshySumBox.Text = " Введите сумму...";
+                GroshySumBox.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
+            }
+        }
+
+        private void GroshyDataGrid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Delete.Visibility = Visibility.Visible;
+        }
+        private void GroshyDataGrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Delete.Visibility = Visibility.Hidden;
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
