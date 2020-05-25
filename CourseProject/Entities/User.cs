@@ -10,10 +10,12 @@ namespace CourseProject.Entities
     {
         public string Login { get; set; }
         public int Id { get; set; }
-        public User(string Login, int Id)
+        public int Day { get; set; }
+        public User(string Login, int Id, int Day)
         {
             this.Login = Login;
             this.Id = Id;
+            this.Day = Day;
         }
     }
 

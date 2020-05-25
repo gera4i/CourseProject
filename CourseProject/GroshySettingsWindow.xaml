@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseProject"
         mc:Ignorable="d"
-        Title="Настройки" Height="600" Width="408.4" ResizeMode="NoResize"
+        Title="Настройки" Height="488.4" Width="392.8" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" >
@@ -214,26 +214,29 @@
     </Window.Resources>
     <Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="391*"/>
-            </Grid.ColumnDefinitions>
+
             <Button x:Name="GroshyAddCategory" Content="Добавить категорию" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="7.5,120,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyAddCategory_Click" Grid.Column="1"/>
             <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7.5,75,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0" Grid.Column="1">
 
             </Border>
             <TextBox x:Name="GroshyNameOfCategory"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="7.5,75,0,0" TextWrapping="Wrap" Text="Введите название категории" VerticalAlignment="Top" Width="169" BorderThickness="0" Background="Transparent" GotFocus="GroshyNameOfCategory_GotFocus" LostFocus="GroshyNameOfCategory_LostFocus" Grid.Column="1" />
-            <Button x:Name="GroshyAddAccount" Content="Добавить счёт" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="211.5,120,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyAddAccount_Click" Grid.Column="1"/>
-            <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="211.5,75,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0" Grid.Column="1"/>
-            <TextBox x:Name="GroshySumOfAccount"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="211.5,75,0,0" TextWrapping="Wrap" Text="Введите сумму счёта" VerticalAlignment="Top" Width="170" BorderThickness="0" Background="Transparent" GotFocus="GroshySumOfAccount_GotFocus" LostFocus="GroshySumOfAccount_LostFocus" PreviewTextInput="GroshySumOfAccount_PreviewTextInput" PreviewKeyDown="GroshySumOfAccount_PreviewKeyDown" Grid.Column="1" />
+            <Button x:Name="GroshyAddAccount" Content="Добавить счёт" Template="{StaticResource btTemplate}" Background="#1683e0" HorizontalAlignment="Left" Margin="198,120,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyAddAccount_Click"/>
+            <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="198,75,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
+            <TextBox x:Name="GroshySumOfAccount"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="198,75,0,0" TextWrapping="Wrap" Text="Введите сумму счёта" VerticalAlignment="Top" Width="170" BorderThickness="0" Background="Transparent" GotFocus="GroshySumOfAccount_GotFocus" LostFocus="GroshySumOfAccount_LostFocus" PreviewTextInput="GroshySumOfAccount_PreviewTextInput" PreviewKeyDown="GroshySumOfAccount_PreviewKeyDown"/>
             <RadioButton x:Name="RadioButtonExpense" Content="Расход" HorizontalAlignment="Left" Margin="7.5,45,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             <RadioButton x:Name="RadioButtonIncome" Content="Доход" HorizontalAlignment="Left" Margin="126.5,45,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-            <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="211.5,32,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0" Grid.Column="1"/>
-            <TextBox x:Name="GroshyNameOfAccount"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="211.5,32,0,0" TextWrapping="Wrap" Text="Введите название счёта" VerticalAlignment="Top" Width="170" BorderThickness="0" Background="Transparent"  LostFocus="GroshyNameOfAccount_LostFocus" GotFocus="GroshyNameOfAccount_GotFocus" Grid.Column="1" />
+            <Border CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="198,32,0,0" Height="40" Width="170" Background="#F2F2F2" BorderBrush="#FFABADB3" BorderThickness="0"/>
+            <TextBox x:Name="GroshyNameOfAccount"  Foreground ="#8A8A8A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="198,32,0,0" TextWrapping="Wrap" Text="Введите название счёта" VerticalAlignment="Top" Width="170" BorderThickness="0" Background="Transparent"  LostFocus="GroshyNameOfAccount_LostFocus" GotFocus="GroshyNameOfAccount_GotFocus" />
             <Label Content="Добавление" Background="#0F559A" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black"  BorderThickness="0,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="403" Grid.ColumnSpan="2" Margin="0,0,-9.4,0"/>
             <Label Content="Удаление" Background="#0F559A" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black"  BorderThickness="0,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="403" Margin="0,178,-9.4,0" Grid.ColumnSpan="2"/>
-            <ComboBox HorizontalAlignment="Left" Margin="7.5,225,0,0" VerticalAlignment="Top" Width="170" Height="40" Grid.Column="1"/>
-            <ComboBox HorizontalAlignment="Left" Margin="197.5,225,0,0" VerticalAlignment="Top" Width="170" Height="40" Grid.Column="1"/>
+            <ComboBox x:Name="GroshyDeleteCategoryComboBox" HorizontalAlignment="Left" Margin="7.5,225,0,0" VerticalAlignment="Top" Width="170" Height="40" Grid.Column="1"/>
+            <ComboBox x:Name="GroshyDeleteAccountComboBox" HorizontalAlignment="Left" Margin="197.5,225,0,0" VerticalAlignment="Top" Width="170" Height="40" Grid.Column="1"/>
+            <Button x:Name="GroshyDeleteCategory" Content="Удалить категорию" Template="{StaticResource btTemplate}" Background="#D30000" HorizontalAlignment="Left" Margin="9.8,286,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyDeleteCategory_Click"/>
+            <Button x:Name="GroshyDeleteAccount" Content="Удалить cчёт" Template="{StaticResource btTemplate}" Background="#D30000" HorizontalAlignment="Left" Margin="197.8,286,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="GroshyDeleteAccount_Click"/>
+            <Label Content="Указать расчётный день" Background="#0F559A" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="Black"  BorderThickness="0,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="403" Margin="-1,347,-0.4,0"/>
+            <DatePicker x:Name="SetDayX" HorizontalAlignment="Left" Margin="149,347,0,0" VerticalAlignment="Top" Width="31" Height="27"/>
+            <Button  Content="Подтвердить" Foreground="White" Background="#1683e0" HorizontalAlignment="Left" Margin="180,347,-0.4,0" VerticalAlignment="Top" Width="222" Height="27" Click="Button_Click"/>
+            <Label x:Name="UserName" BorderBrush="DarkRed" BorderThickness="0,0,0,0.5" Content="Label" Foreground="DarkRed" HorizontalAlignment="Left" Margin="10,419,0,0" VerticalAlignment="Top" Width="358" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="29" PreviewMouseDown="UserName_PreviewMouseDown"/>
         </Grid>
     </Grid>
 </Window>

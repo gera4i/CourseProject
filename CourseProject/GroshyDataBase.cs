@@ -81,24 +81,7 @@ namespace CourseProject
             }
         }
 
-        //public void AddUser()
-        //{
-        //    string convertDate;
-        //    convertDate = Convert.ToString(Date.Year) + "-0" + Convert.ToString(Date.Month) + "-" + Convert.ToString(Date.Day);
-        //    if (flag)
-        //    {
-        //        Sum = -Sum;
-        //    }
-        //    string Summa = Convert.ToString(Sum).Replace(",", ".");
-        //    string sqlExpression1 = String.Format("INSERT INTO Transactions (SumOfTransaction, Category, Account, Date, Discription) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", Summa, Cat, Acc, convertDate, Discription);
 
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
-        //        SqlCommand command = new SqlCommand(sqlExpression1, connection);
-        //        int number = command.ExecuteNonQuery();
-        //    }
-        //}
         public void CategoriesToList()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -142,6 +125,7 @@ namespace CourseProject
             }
         }
        
+        
         public void GetUser(string Login, string Password, User user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -156,8 +140,13 @@ namespace CourseProject
                         {
                             String tempLogin = reader["Login"].ToString();
                             int tempId = Convert.ToInt32(reader["IdUser"]);
+                            String tempDay = reader["DayX"].ToString();
                             user.Id = tempId;
                             user.Login = tempLogin;
+                            if(tempDay != "")
+                            {
+                                user.Day = Convert.ToInt32(tempDay);
+                            }
                         }
                     }
                 }
@@ -195,6 +184,41 @@ namespace CourseProject
                     int number = command.ExecuteNonQuery();
                     MessageBox.Show("Добавлено объектов: " + number);
                 }
+        }
+        public void UpdateUser(User user)
+        {
+            string sqlExpression = String.Format("UPDATE Users SET DayX = {0} WHERE IdUser = {1}", user.Day, user.Id);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+        public void DeleteCategory(Category category, int Id )
+        {
+            string sqlExpression = String.Format("DELETE FROM Categories WHERE Category = '{0}' and IdUser = {1}", category.Name, Id);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                int number = command.ExecuteNonQuery();
+                MessageBox.Show("Удалена категория: " + category.Name);
+            }
+        }
+        public void DeleteAccount(Account account, int Id)
+        {
+            string sqlExpression = String.Format("DELETE FROM Accounts WHERE Account = '{0}' and IdUser = {1}", account.Name, Id);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                int number = command.ExecuteNonQuery();
+                MessageBox.Show("Удален счёт: " + account.Name);
+            }
         }
 
         public void TransactionsToList()

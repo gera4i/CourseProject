@@ -18,7 +18,8 @@ namespace CourseProject
 
         }
         GroshyDataBase groshyDataBase = new GroshyDataBase();
-        public User user = new User(null, 0);
+        public User user = new User(null, 0, 30);
+        public bool isClose = false;
      
         public void AddCategory(int IsExpense, string Name)
         {
@@ -55,7 +56,23 @@ namespace CourseProject
             groshyDataBase.TransactionsToList();
 
         }
-       
+        public void UpdateUser()
+        {
+            groshyDataBase.UpdateUser(user);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            groshyDataBase.DeleteCategory(category, user.Id);
+            categories.Remove(category);
+        }
+        public void DeleteAccount(Account account)
+        {
+            groshyDataBase.DeleteAccount(account, user.Id);
+            accounts.Remove(account);
+        }
+
+
         public static GroshyModel shared = new GroshyModel();
 
         public void AddTransaction(Transaction transaction)
@@ -92,10 +109,21 @@ namespace CourseProject
           
             return summary;
         }
-        public int DayX = 30;
         public double MoneyPerMounth()
         {
-            int period = Math.Abs(DateTime.Today.Day - DayX);
+            int period;
+            if (user.Day > DateTime.Today.Day)
+            {
+                period = user.Day - DateTime.Today.Day + 1;
+            }
+            else if(user.Day == DateTime.Today.Day)
+            {
+                period = 1;
+            }
+            else
+            {
+                period = 30 - DateTime.Today.Day + user.Day;
+            }
             double X = Math.Round(CountMoney("") / period, 2);
             return X;
         }

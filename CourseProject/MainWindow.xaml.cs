@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -150,12 +151,12 @@ namespace CourseProject
             transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
         }
 
-      
+
 
         private void GroshySettings_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            GroshyBlure.Visibility = Visibility.Visible; 
+            GroshyBlure.Visibility = Visibility.Visible;
             GroshySettingsWindow groshySettingsWindow = new GroshySettingsWindow();
             groshySettingsWindow.ShowDialog();
             GroshyBlure.Visibility = Visibility.Hidden;
@@ -182,6 +183,18 @@ namespace CourseProject
             GroshyComboBoxAccountSort.Text = "Все cчета";
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
             AvgPerDay.Text = Convert.ToString(GroshyModel.shared.MoneyPerMounth());
+            if (GroshyModel.shared.isClose)
+            {
+                GroshyModel.shared.user = new User(null, 0, 30);
+                GroshyModel.shared.isClose = false;
+                GroshyModel.shared.tempTransactionList.Clear();
+                GroshyModel.shared.accounts.Clear();
+                GroshyModel.shared.categories.Clear();
+                GroshyModel.shared.transactions.Clear();
+                SignIn sign = new SignIn();
+                sign.Show();
+                Close();
+            }
         }
 
 
@@ -377,11 +390,18 @@ namespace CourseProject
         }
         private void GroshyDataGrid_LostFocus(object sender, RoutedEventArgs e)
         {
-            Delete.Visibility = Visibility.Hidden;
+            if(GroshyDataGrid.SelectedItem == null)
+            {
+                Delete.Visibility = Visibility.Hidden;
+            }
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (GroshyDataGrid.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Выберите один элемент!");
+                return;
+            }
         }
     }
 }

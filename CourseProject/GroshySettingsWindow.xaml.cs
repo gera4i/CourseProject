@@ -20,12 +20,22 @@ namespace CourseProject
     /// </summary>
     public partial class GroshySettingsWindow : Window
     {
+        private string Exit = GroshyModel.shared.user.Login;
         public GroshySettingsWindow()
         {
             InitializeComponent();
             GroshyNameOfCategory.MaxLength = 19;
             GroshyNameOfAccount.MaxLength = 19;
             GroshySumOfAccount.MaxLength = 9;
+            foreach (var item in GroshyModel.shared.accounts)
+            {
+                GroshyDeleteAccountComboBox.Items.Add(item.Name);
+            }
+            foreach (var item in GroshyModel.shared.categories)
+            {
+                GroshyDeleteCategoryComboBox.Items.Add(item.Name);
+            }
+            UserName.Content = Exit + ", Вы можете выйти из аккаунта.";
         }
 
 
@@ -195,6 +205,64 @@ namespace CourseProject
         {
             e.Handled = e.Key == Key.Space;
 
+        }
+
+        private void GroshyDeleteCategory_Click(object sender, RoutedEventArgs e)
+        {
+            if(GroshyDeleteCategoryComboBox.Text!="")
+            {
+                GroshyModel.shared.DeleteCategory(GroshyModel.shared.categories.Find(item => item.Name == GroshyDeleteCategoryComboBox.Text));
+                GroshyDeleteCategoryComboBox.Text = "";
+                GroshyDeleteCategoryComboBox.Items.Clear();
+                foreach (var item in GroshyModel.shared.categories)
+                {
+                    GroshyDeleteCategoryComboBox.Items.Add(item.Name);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Выберите категорию!");
+            }
+        }
+
+        private void GroshyDeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (GroshyDeleteAccountComboBox.Text != "")
+            {
+                GroshyModel.shared.DeleteAccount(GroshyModel.shared.accounts.Find(item => item.Name == GroshyDeleteAccountComboBox.Text));
+                GroshyDeleteAccountComboBox.Items.Clear();
+                GroshyDeleteAccountComboBox.Text = "";
+                foreach (var item in GroshyModel.shared.accounts)
+                {
+                    GroshyDeleteAccountComboBox.Items.Add(item.Name);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите категорию!");
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (SetDayX.SelectedDate != null)
+            {
+                GroshyModel.shared.user.Day = SetDayX.SelectedDate.Value.Day;
+                GroshyModel.shared.UpdateUser();
+                MessageBox.Show("День отсчёта: " + SetDayX.SelectedDate.Value.Day + " для каждого месяца");
+            }
+            else
+            {
+                MessageBox.Show("Выберите дату!");
+            }
+
+        }
+
+        private void UserName_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GroshyModel.shared.isClose = true;
+            Close();
         }
     }
 }

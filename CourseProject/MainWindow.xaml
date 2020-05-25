@@ -511,7 +511,7 @@
                     <Label Content="Укажите конец периода:" Foreground="White" HorizontalAlignment="Left" Margin="44,149,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
                     <Label Content="Выберите счёт:" Foreground="White" HorizontalAlignment="Left" Margin="44,211,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
                     <Label Content="Выберите категорию:" Foreground="White" HorizontalAlignment="Left" Margin="45,287,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234"/>
-                    <TextBox x:Name="AvgPerDay" FontSize="18" Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Height="24" Margin="136,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="110"/>
+                    <TextBox x:Name="AvgPerDay" IsReadOnly="True" FontSize="18" Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Height="24" Margin="136,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="110"/>
                     <Label Content="В день:" Foreground="White" HorizontalAlignment="Left" Margin="67,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234" FontSize="18"/>
                     <Label Content="" BorderBrush="Black" BorderThickness="0,0,0,1" Foreground="White" HorizontalAlignment="Left" Margin="1,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.151,0.234" FontSize="18" Width="254" Height="17">
                         <Label.RenderTransform>
@@ -574,7 +574,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="Delete" Background="#D30000" Visibility="Hidden" Content="Удалить транзакцию" Template="{StaticResource btTemplate2}" HorizontalAlignment="Left" Margin="0,383,0,0" VerticalAlignment="Top" Width="624" Height="40"/>
+            <Button x:Name="Delete" Background="#D30000" Visibility="Hidden" Content="Удалить транзакцию" Template="{StaticResource btTemplate2}" HorizontalAlignment="Left" Margin="0,383,0,0" VerticalAlignment="Top" Width="624" Height="40" Click="Delete_Click"/>
             <Button x:Name="SortInfo" Content="Все транзакици" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="624" Height="35"/>
 
         </Grid>
