@@ -220,6 +220,18 @@ namespace CourseProject
                 MessageBox.Show("Удален счёт: " + account.Name);
             }
         }
+        public void DeleteTransaction(Transaction transaction)
+        {
+            string sqlExpression = String.Format("DELETE FROM Transactions WHERE IdTransaction = {0}", transaction.IdTransaction);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                int number = command.ExecuteNonQuery();
+                MessageBox.Show("Удаленa");
+            }
+        }
 
         public void TransactionsToList()
         {
@@ -242,7 +254,8 @@ namespace CourseProject
                             String tempCategory = reader["Category"].ToString();
                             DateTime tempDate = Convert.ToDateTime(reader["Date"].ToString());
                             String tempDiscription = reader["Discription"].ToString();
-                            if(tempSum>0)
+                            int tempId = Convert.ToInt32(reader["IdTransaction"]);
+                            if (tempSum>0)
                             {
                                 isExpenceFlag = false;
                             }
@@ -260,7 +273,7 @@ namespace CourseProject
                                     acc = item;
                                 }
                             }
-                            Transaction transaction = new Transaction(isExpenceFlag, tempSum, acc, cat, tempDate, tempDiscription );
+                            Transaction transaction = new Transaction(isExpenceFlag, tempSum, acc, cat, tempDate, tempDiscription, tempId);
                             GroshyModel.shared.transactions.Add(transaction);
                             GroshyModel.shared.tempTransactionList.Add(transaction);
                         }

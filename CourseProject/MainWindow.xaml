@@ -544,7 +544,7 @@
                     <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.4"></DropShadowEffect>
                 </Border.Effect>
             </Border>
-            <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" HorizontalScrollBarVisibility="Hidden" BorderThickness="0" Margin="10,10,0,0" IsReadOnly="True" CanUserResizeRows="False" CanUserResizeColumns="False" GotFocus="GroshyDataGrid_GotFocus" LostFocus="GroshyDataGrid_LostFocus">
+            <DataGrid x:Name="GroshyDataGrid" HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Width="600" AutoGenerateColumns="False" Background="Transparent" HorizontalScrollBarVisibility="Hidden" SelectedItem="{Binding Transaction}" BorderThickness="0" Margin="10,10,0,0" IsReadOnly="True" CanUserResizeRows="False" CanUserResizeColumns="False" GotFocus="GroshyDataGrid_GotFocus" LostFocus="GroshyDataGrid_LostFocus">
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
                         <Setter Property="Background" Value="White" />
@@ -560,11 +560,11 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name}" Width="118"/>
-                    <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name}" Width="119" />
-                    <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction}" Width="118" />
-                    <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date, StringFormat={}{0:dd.MM.yyyy}}"  Width="119" />
-                    <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description}" Width="124">
+                    <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name, UpdateSourceTrigger=PropertyChanged}"  Width="118"/>
+                    <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name, UpdateSourceTrigger=PropertyChanged}" Width="119" />
+                    <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction, UpdateSourceTrigger=PropertyChanged}" Width="118" />
+                    <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date, StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}"  Width="119" />
+                    <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="124">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"></Setter>
@@ -574,7 +574,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="Delete" Background="#D30000" Visibility="Hidden" Content="Удалить транзакцию" Template="{StaticResource btTemplate2}" HorizontalAlignment="Left" Margin="0,383,0,0" VerticalAlignment="Top" Width="624" Height="40" Click="Delete_Click"/>
+            <Button x:Name="Delete" Background="#D30000" Visibility="Hidden" Content="Удалить транзакцию" Template="{StaticResource btTemplate2}" HorizontalAlignment="Left" Margin="0,383,0,0" VerticalAlignment="Top" Width="624" Height="40" Click="Delete_Click" CommandParameter="{Binding Transaction}"/>
             <Button x:Name="SortInfo" Content="Все транзакици" Template="{StaticResource btTemplate2}" Background="#1683e0" HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="624" Height="35"/>
 
         </Grid>

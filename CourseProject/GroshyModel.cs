@@ -71,6 +71,11 @@ namespace CourseProject
             groshyDataBase.DeleteAccount(account, user.Id);
             accounts.Remove(account);
         }
+        public void DeleteTransaction(Transaction transaction)
+        {
+            groshyDataBase.DeleteTransaction(transaction);
+            transactions.Remove(transaction);
+        }
 
 
         public static GroshyModel shared = new GroshyModel();

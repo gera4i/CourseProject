@@ -27,7 +27,7 @@ namespace CourseProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Transaction transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
+        Transaction transaction = new Transaction(true, 0, null, null, DateTime.Now, "", 0);
         private bool isTransactionExpense = true;
         public MainWindow()
         {
@@ -138,6 +138,12 @@ namespace CourseProject
 
             transaction.SumOfTransaction = Convert.ToDouble(GroshySumBox.Text);
             GroshyModel.shared.AddTransaction(transaction);
+            GroshyModel.shared.transactions.Clear();
+            foreach (var item in GroshyModel.shared.tempTransactionList)
+            {
+                GroshyModel.shared.transactions.Add(item);
+            }
+            SortInfo.Content = "Все транзакции";
             GroshyDataGrid.ItemsSource = GroshyModel.shared.transactions;
             GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
             AvgPerDay.Text = Convert.ToString(GroshyModel.shared.MoneyPerMounth());
@@ -147,8 +153,9 @@ namespace CourseProject
             GroshyDescritptionBox.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#8A8A8A");
             GroshyComboBoxAccount.Text = "";
             GroshyComboBoxCategory.Text = "";
+            GroshyDatePicker.SelectedDate = DateTime.Today;
             MessageBox.Show("Успешно добавлено:)");
-            transaction = new Transaction(true, 0, null, null, DateTime.Now, "");
+            transaction = new Transaction(true, 0, null, null, DateTime.Now, "", 0);
         }
 
 
@@ -390,7 +397,7 @@ namespace CourseProject
         }
         private void GroshyDataGrid_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(GroshyDataGrid.SelectedItem == null)
+            if(GroshyDataGrid.SelectedItems.Count != 1)
             {
                 Delete.Visibility = Visibility.Hidden;
             }
@@ -401,6 +408,10 @@ namespace CourseProject
             {
                 MessageBox.Show("Выберите один элемент!");
                 return;
+            }
+            else
+            {
+                GroshyModel.shared.DeleteTransaction(GroshyModel.shared.transactions[GroshyDataGrid.SelectedIndex]);
             }
         }
     }
