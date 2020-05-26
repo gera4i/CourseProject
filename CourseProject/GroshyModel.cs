@@ -75,6 +75,7 @@ namespace CourseProject
         {
             groshyDataBase.DeleteTransaction(transaction);
             transactions.Remove(transaction);
+            tempTransactionList.Remove(transaction);
         }
 
 

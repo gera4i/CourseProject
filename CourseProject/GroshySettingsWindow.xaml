@@ -47,6 +47,13 @@
                 </Border.Effect>
             </Border>
         </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate2">
+            <Border BorderBrush="#FFABADB3" BorderThickness="0"
+                    Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" Foreground="White"/>
+              
+            </Border>
+        </ControlTemplate>
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -240,7 +247,7 @@
             <Button x:Name="GroshyDeleteAccount" Content="Удалить cчёт" Template="{StaticResource btTemplate}" Background="#D30000" HorizontalAlignment="Left" Margin="198,286,0,0" VerticalAlignment="Top" Width="168" Height="40" Click="GroshyDeleteAccount_Click"/>
             <Label Content="Указать расчётный день" Background="#0F559A" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="Black"  BorderThickness="0,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="386" Margin="0,411,0,0" Height="47"/>
             <DatePicker x:Name="SetDayX" HorizontalAlignment="Left" Margin="142,424,0,0" VerticalAlignment="Top" Width="32" Height="24"/>
-            <Button  Content="Подтвердить" Foreground="White" Background="#1683e0" HorizontalAlignment="Left" Margin="174,411,0,0" VerticalAlignment="Top" Width="212" Height="47" Click="Button_Click"/>
+            <Button  Template="{StaticResource btTemplate2}" Content="Подтвердить" Foreground="White" Background="#1683e0" HorizontalAlignment="Left" Margin="174,411,0,0" VerticalAlignment="Top" Width="212" Height="47" Click="Button_Click"/>
             <Label x:Name="UserName" BorderBrush="DarkRed" BorderThickness="0,0,0,0.5" Content="Label" Foreground="DarkRed" HorizontalAlignment="Left" Margin="18,362,0,0" VerticalAlignment="Top" Width="358" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="29" PreviewMouseDown="UserName_PreviewMouseDown"/>
             <Label Content="Добавление" Margin="13,-3,192.4,435.4"/>
             <Label Content="Удаление" Margin="18,181,187.4,251.4"/>

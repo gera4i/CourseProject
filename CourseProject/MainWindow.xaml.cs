@@ -242,7 +242,7 @@ namespace CourseProject
                 {
                     Info += "Доходы ";
                 }
-                GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
+                //GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(""));
             }
             else
             {
@@ -256,7 +256,7 @@ namespace CourseProject
                             GroshyModel.shared.transactions.Remove(item);
                         }
                     }
-                    GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
+                    //GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
 
                 }
                 else if (GroshyComboBoxAccountSort.Text == "Все cчета")
@@ -308,7 +308,7 @@ namespace CourseProject
                             GroshyModel.shared.transactions.Remove(item);
                         }
                     }
-                    GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
+                    //GroshySumOfAccounts.Content = Convert.ToString(GroshyModel.shared.CountMoney(GroshyComboBoxAccountSort.Text));
                 }
             }
             if (GroshyDatePickerStart.SelectedDate != GroshyDatePickerEnd.SelectedDate)

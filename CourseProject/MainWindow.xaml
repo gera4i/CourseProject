@@ -561,10 +561,10 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name, UpdateSourceTrigger=PropertyChanged}"  Width="118"/>
-                    <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name, UpdateSourceTrigger=PropertyChanged}" Width="119" />
-                    <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction, UpdateSourceTrigger=PropertyChanged}" Width="118" />
-                    <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date, StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}"  Width="119" />
+                    <DataGridTextColumn x:Name="category" Header="Категория" Binding="{Binding Path=Category.Name, UpdateSourceTrigger=PropertyChanged}"  Width="124"/>
+                    <DataGridTextColumn x:Name="account" Header="Cчёт" Binding="{Binding Path=Account.Name, UpdateSourceTrigger=PropertyChanged}" Width="124" />
+                    <DataGridTextColumn x:Name="sum" Header="Сумма" Binding="{Binding Path=SumOfTransaction, UpdateSourceTrigger=PropertyChanged}" Width="122" />
+                    <DataGridTextColumn x:Name="date" Header="Дата" Binding="{Binding Path=Date, StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}"  Width="121" />
                     <DataGridTextColumn x:Name="discription" Header="Описание" Binding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="124">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
